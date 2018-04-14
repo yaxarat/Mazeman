@@ -17,11 +17,14 @@
 		55EB5AA92082486D002B3C5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AA72082486D002B3C5B /* LaunchScreen.storyboard */; };
 		55EB5AB320824B48002B3C5B /* death.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB120824B48002B3C5B /* death.wav */; };
 		55EB5AB420824B48002B3C5B /* bite.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB220824B48002B3C5B /* bite.wav */; };
-		55EB5AB6208260E8002B3C5B /* chime_uo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB5208260E8002B3C5B /* chime_uo.wav */; };
+		55EB5AB6208260E8002B3C5B /* chime_up.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB5208260E8002B3C5B /* chime_up.wav */; };
 		55EB5AB820826132002B3C5B /* eat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB720826132002B3C5B /* eat.wav */; };
 		55EB5ABA20826224002B3C5B /* fireBall.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB920826224002B3C5B /* fireBall.wav */; };
 		55EB5ABC208262E2002B3C5B /* enemy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5ABB208262E2002B3C5B /* enemy.wav */; };
 		55EB5ABE2082633B002B3C5B /* throw.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5ABD2082633B002B3C5B /* throw.wav */; };
+		55EB5AC1208264B7002B3C5B /* CreateMaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5AC0208264B7002B3C5B /* CreateMaze.swift */; };
+		55EB5AC32082652E002B3C5B /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5AC22082652E002B3C5B /* Block.swift */; };
+		55EB5AC5208267F9002B3C5B /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5AC4208267F9002B3C5B /* GameOver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,11 +40,14 @@
 		55EB5AAA2082486D002B3C5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55EB5AB120824B48002B3C5B /* death.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = death.wav; sourceTree = "<group>"; };
 		55EB5AB220824B48002B3C5B /* bite.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bite.wav; sourceTree = "<group>"; };
-		55EB5AB5208260E8002B3C5B /* chime_uo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chime_uo.wav; sourceTree = "<group>"; };
+		55EB5AB5208260E8002B3C5B /* chime_up.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chime_up.wav; sourceTree = "<group>"; };
 		55EB5AB720826132002B3C5B /* eat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = eat.wav; sourceTree = "<group>"; };
 		55EB5AB920826224002B3C5B /* fireBall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fireBall.wav; sourceTree = "<group>"; };
 		55EB5ABB208262E2002B3C5B /* enemy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = enemy.wav; sourceTree = "<group>"; };
 		55EB5ABD2082633B002B3C5B /* throw.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = throw.wav; sourceTree = "<group>"; };
+		55EB5AC0208264B7002B3C5B /* CreateMaze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMaze.swift; sourceTree = "<group>"; };
+		55EB5AC22082652E002B3C5B /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		55EB5AC4208267F9002B3C5B /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,32 +80,43 @@
 		55EB5A972082486A002B3C5B /* MazeMan */ = {
 			isa = PBXGroup;
 			children = (
-				55EB5AB020824B25002B3C5B /* Sounds */,
+				55EB5ABF208263DD002B3C5B /* Helpers */,
+				55EB5AB020824B25002B3C5B /* Sound Assets */,
 				55EB5A982082486A002B3C5B /* AppDelegate.swift */,
-				55EB5A9A2082486A002B3C5B /* GameScene.sks */,
-				55EB5A9C2082486A002B3C5B /* Actions.sks */,
 				55EB5A9E2082486A002B3C5B /* GameScene.swift */,
 				55EB5AA02082486A002B3C5B /* GameViewController.swift */,
 				55EB5AA22082486A002B3C5B /* Main.storyboard */,
 				55EB5AA52082486D002B3C5B /* Assets.xcassets */,
+				55EB5A9A2082486A002B3C5B /* GameScene.sks */,
+				55EB5A9C2082486A002B3C5B /* Actions.sks */,
 				55EB5AA72082486D002B3C5B /* LaunchScreen.storyboard */,
 				55EB5AAA2082486D002B3C5B /* Info.plist */,
 			);
 			path = MazeMan;
 			sourceTree = "<group>";
 		};
-		55EB5AB020824B25002B3C5B /* Sounds */ = {
+		55EB5AB020824B25002B3C5B /* Sound Assets */ = {
 			isa = PBXGroup;
 			children = (
 				55EB5ABB208262E2002B3C5B /* enemy.wav */,
-				55EB5AB5208260E8002B3C5B /* chime_uo.wav */,
+				55EB5AB5208260E8002B3C5B /* chime_up.wav */,
 				55EB5AB920826224002B3C5B /* fireBall.wav */,
 				55EB5AB720826132002B3C5B /* eat.wav */,
 				55EB5AB220824B48002B3C5B /* bite.wav */,
 				55EB5AB120824B48002B3C5B /* death.wav */,
 				55EB5ABD2082633B002B3C5B /* throw.wav */,
 			);
-			path = Sounds;
+			path = "Sound Assets";
+			sourceTree = "<group>";
+		};
+		55EB5ABF208263DD002B3C5B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				55EB5AC0208264B7002B3C5B /* CreateMaze.swift */,
+				55EB5AC22082652E002B3C5B /* Block.swift */,
+				55EB5AC4208267F9002B3C5B /* GameOver.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,7 +184,7 @@
 				55EB5AB420824B48002B3C5B /* bite.wav in Resources */,
 				55EB5ABC208262E2002B3C5B /* enemy.wav in Resources */,
 				55EB5A9B2082486A002B3C5B /* GameScene.sks in Resources */,
-				55EB5AB6208260E8002B3C5B /* chime_uo.wav in Resources */,
+				55EB5AB6208260E8002B3C5B /* chime_up.wav in Resources */,
 				55EB5AA62082486D002B3C5B /* Assets.xcassets in Resources */,
 				55EB5AA92082486D002B3C5B /* LaunchScreen.storyboard in Resources */,
 				55EB5A9D2082486A002B3C5B /* Actions.sks in Resources */,
@@ -182,7 +199,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55EB5AC1208264B7002B3C5B /* CreateMaze.swift in Sources */,
 				55EB5A9F2082486A002B3C5B /* GameScene.swift in Sources */,
+				55EB5AC32082652E002B3C5B /* Block.swift in Sources */,
+				55EB5AC5208267F9002B3C5B /* GameOver.swift in Sources */,
 				55EB5AA12082486A002B3C5B /* GameViewController.swift in Sources */,
 				55EB5A992082486A002B3C5B /* AppDelegate.swift in Sources */,
 			);
