@@ -16,8 +16,35 @@
       <file leaf-file-name="GameScene.swift" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MazeMan/GameScene.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="157" column="100" lean-forward="true" selection-start-line="157" selection-start-column="100" selection-end-line="157" selection-end-column="100" />
+            <state relative-caret-position="3761">
+              <caret line="410" column="57" lean-forward="false" selection-start-line="410" selection-start-column="57" selection-end-line="410" selection-end-column="57" />
+              <folding>
+                <element signature="e#2256#2491#0" expanded="false" />
+                <element signature="e#2497#2760#0" expanded="false" />
+                <element signature="e#2766#3478#0" expanded="false" />
+                <element signature="e#3484#5290#0" expanded="false" />
+                <element signature="e#5296#5527#0" expanded="false" />
+                <element signature="e#5533#7249#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Block.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Block.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Elements.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Elements.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="43" lean-forward="false" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -144,12 +171,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1523723474135</updated>
-      <workItem from="1523723475795" duration="8260000" />
+      <workItem from="1523723475795" duration="9680000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8260000" />
+    <option name="totallyTimeSpent" value="9680000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="448" y="-1440" width="1492" height="1440" extended-state="0" />
@@ -184,22 +211,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Block.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Elements.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="43" lean-forward="false" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MazeMan/GameViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -216,11 +227,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Block.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Elements.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="43" lean-forward="false" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MazeMan/GameScene.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="157" column="100" lean-forward="true" selection-start-line="157" selection-start-column="100" selection-end-line="157" selection-end-column="100" />
-          <folding />
+        <state relative-caret-position="3761">
+          <caret line="410" column="57" lean-forward="false" selection-start-line="410" selection-start-column="57" selection-end-line="410" selection-end-column="57" />
+          <folding>
+            <element signature="e#2256#2491#0" expanded="false" />
+            <element signature="e#2497#2760#0" expanded="false" />
+            <element signature="e#2766#3478#0" expanded="false" />
+            <element signature="e#3484#5290#0" expanded="false" />
+            <element signature="e#5296#5527#0" expanded="false" />
+            <element signature="e#5533#7249#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
