@@ -25,6 +25,7 @@
 		55EB5AC1208264B7002B3C5B /* PlaceBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5AC0208264B7002B3C5B /* PlaceBlock.swift */; };
 		55EB5AC32082652E002B3C5B /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5AC22082652E002B3C5B /* Block.swift */; };
 		55EB5AC5208267F9002B3C5B /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5AC4208267F9002B3C5B /* GameOver.swift */; };
+		6D702173E9FC34CEE366A07E /* Immutables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7029D9DEE4C8BEBD6DA439 /* Immutables.swift */; };
 		6D702E16B52F2776942FA72E /* Elements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7028B3E5066928EDCC2227 /* Elements.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		55EB5AC22082652E002B3C5B /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		55EB5AC4208267F9002B3C5B /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		6D7028B3E5066928EDCC2227 /* Elements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Elements.swift; sourceTree = "<group>"; };
+		6D7029D9DEE4C8BEBD6DA439 /* Immutables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Immutables.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				55EB5AC22082652E002B3C5B /* Block.swift */,
 				55EB5AC4208267F9002B3C5B /* GameOver.swift */,
 				6D7028B3E5066928EDCC2227 /* Elements.swift */,
+				6D7029D9DEE4C8BEBD6DA439 /* Immutables.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				55EB5AA12082486A002B3C5B /* GameViewController.swift in Sources */,
 				55EB5A992082486A002B3C5B /* AppDelegate.swift in Sources */,
 				6D702E16B52F2776942FA72E /* Elements.swift in Sources */,
+				6D702173E9FC34CEE366A07E /* Immutables.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

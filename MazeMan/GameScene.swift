@@ -11,45 +11,21 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
+    // Assets
     var maze = PlaceBlock()
     var allTimers = [Timer]()
     var itemArray: [[SKSpriteNode]]!
     var blockCreationTimer = 0, addRockTimer = 0, reviveTimer = 0
     var rockCount, starCount, heartCount, energyCount: Int!
 
-    // Labels
-    let starCountLabel  = SKLabelNode(fontNamed: "Avenir")
-    let rockCountLabel = SKLabelNode(fontNamed: "Avenir")
-    let heartCountLabel = SKLabelNode(fontNamed: "Avenir")
-    let energyCountLabel = SKLabelNode(fontNamed: "Avenir")
-    let statusBarLabel = SKLabelNode(fontNamed: "Avenir")
-    // Elements
-    let character = SKSpriteNode(imageNamed: "app-icon")
-    let dino1 = SKSpriteNode(imageNamed: "dino1")
-    let dino2 = SKSpriteNode(imageNamed: "dino2")
-    let dino3 = SKSpriteNode(imageNamed: "dino3")
-    let dino4 = SKSpriteNode(imageNamed: "dino4")
-    // Sounds
-    let throwSound = SKAction.playSoundFileNamed("throw.wav", waitForCompletion:false)
-    let eatSound = SKAction.playSoundFileNamed("eat.wav", waitForCompletion:false)
-    let deathSound = SKAction.playSoundFileNamed("death.wav", waitForCompletion:false)
-    let starSound = SKAction.playSoundFileNamed("star.wav", waitForCompletion:false)
-    let hurtSound = SKAction.playSoundFileNamed("bite.wav", waitForCompletion:false)
-    let fireHurtSound = SKAction.playSoundFileNamed("fire.wav", waitForCompletion:false)
-    let enemyDeathSound = SKAction.playSoundFileNamed("dino.wav", waitForCompletion:false)
-
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
 
         initAll()
 
-        setInitialCharacterLoc()
         addFood()
         addStar()
-        addDino1()
-        addDino2()
-        addDino3()
-        addDino4()
+
         bottomCornerStats()
         addGestures()
         makeStatusBar()
@@ -65,6 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initLabel()
         initBg()
         initBoundsAndPonds()
+        addCharacters()
     }
 
     func initTimeAndCount() {
@@ -145,19 +122,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func initBoundsAndPonds() {
         let boundTop = SKSpriteNode()
-        let boundBottom = SKSpriteNode()
         let boundLeft = SKSpriteNode()
         let boundRight = SKSpriteNode()
+        let boundBottom = SKSpriteNode()
+        let boundBottom1 = SKSpriteNode()
+        let boundBottom2 = SKSpriteNode()
 
         boundTop.position = CGPoint(x: self.frame.width/2, y: 896)
         boundTop.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.frame.width, height:1))
         addChild(boundTop)
         boundTop.physicsBody?.isDynamic = false
-
-        boundBottom.position = CGPoint(x: self.frame.width/2, y: 63)
-        boundBottom.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 512, height:1))
-        addChild(boundBottom)
-        boundBottom.physicsBody?.isDynamic = false
 
         boundLeft.position = CGPoint(x: 0, y:self.frame.height/2)
         boundLeft.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 1, height:self.frame.height))
@@ -168,6 +142,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         boundRight.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 1, height:self.frame.height))
         addChild(boundRight)
         boundRight.physicsBody?.isDynamic = false
+
+        boundBottom.position = CGPoint(x: 256, y: 63)
+        boundBottom1.position = CGPoint(x: 712, y: 63)
+        boundBottom2.position = CGPoint(x: 1140, y: 63)
+        boundBottom.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 512, height:1))
+        addChild(boundBottom)
+        boundBottom.physicsBody?.isDynamic = false
+        boundBottom1.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 256, height:1))
+        addChild(boundBottom1)
+        boundBottom1.physicsBody?.isDynamic = false
+        boundBottom2.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 470, height:1))
+        addChild(boundBottom2)
+        boundBottom2.physicsBody?.isDynamic = false
 
         createCollisionBitmasks(item: "border" , node: boundTop)
         createCollisionBitmasks(item: "border" , node: boundBottom)
@@ -184,11 +171,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func makeBoundary(yCoordinate: CGFloat) {
         for i in 0...21 {
-            let singleBlock = SKSpriteNode(imageNamed: "block")
-            singleBlock.size = CGSize(width: 64, height: 64)
-            singleBlock.position = CGPoint(x:singleBlock.frame.size.width/2 + CGFloat(64*i), y: yCoordinate)
-            self.addChild(singleBlock)
-
+            let aBlock = SKSpriteNode(imageNamed: "block")
+            aBlock.size = CGSize(width: 64, height: 64)
+            aBlock.position = CGPoint(x: aBlock.frame.size.width/2 + CGFloat(64*i), y: yCoordinate)
+            self.addChild(aBlock)
         }
     }
 
@@ -244,7 +230,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         energyCountLabel.text = String(energyCount)
     }
 
-    func setInitialCharacterLoc(){
+    func addCharacters() {
+        Character()
+        addDino1()
+        addDino2()
+        addDino3()
+        addDino4()
+    }
+
+    func Character(){
         character.size = CGSize(width: 64, height: 64)
         character.position = CGPoint(x:character.frame.size.width/2, y: character.frame.size.height/2 + (64))
         character.physicsBody = SKPhysicsBody(rectangleOf: character.size, center: character.anchorPoint)
@@ -258,14 +252,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         maze.blockArray[0][0].hasBeenTaken = true
     }
 
+    //TODO: FIX THESE
     func addDino1(){
         let waterSpawn = Int(arc4random_uniform(2))
         var xPos: CGFloat = 0
         dino1.size = CGSize(width: 64, height: 64)
         if waterSpawn == 0 {
-            xPos = dino1.frame.size.width/2 + (64*8)
+            xPos = dino1.frame.size.width/2 + (64*6)
         } else {
-            xPos = dino1.frame.size.width/2 + (64*13)
+            xPos = dino1.frame.size.width/2 + (64*16)
         }
         dino1.position = CGPoint(x: xPos, y: dino1.frame.size.height/2 + 64)
         dino1.physicsBody = SKPhysicsBody(rectangleOf: dino1.size, center: dino1.anchorPoint)
@@ -328,7 +323,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func checkForDinos() {
         if (self.childNode(withName: "dino1") == nil) {
-            addDino1()
+            addChild(dino1)
         }
         if (self.childNode(withName: "dino2") == nil) {
             addDino2()
