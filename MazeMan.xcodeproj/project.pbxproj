@@ -17,14 +17,15 @@
 		55EB5AA92082486D002B3C5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AA72082486D002B3C5B /* LaunchScreen.storyboard */; };
 		55EB5AB320824B48002B3C5B /* death.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB120824B48002B3C5B /* death.wav */; };
 		55EB5AB420824B48002B3C5B /* bite.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB220824B48002B3C5B /* bite.wav */; };
-		55EB5AB6208260E8002B3C5B /* chime_up.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB5208260E8002B3C5B /* chime_up.wav */; };
+		55EB5AB6208260E8002B3C5B /* star.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB5208260E8002B3C5B /* star.wav */; };
 		55EB5AB820826132002B3C5B /* eat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB720826132002B3C5B /* eat.wav */; };
-		55EB5ABA20826224002B3C5B /* fireBall.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB920826224002B3C5B /* fireBall.wav */; };
-		55EB5ABC208262E2002B3C5B /* enemy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5ABB208262E2002B3C5B /* enemy.wav */; };
+		55EB5ABA20826224002B3C5B /* fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB920826224002B3C5B /* fire.wav */; };
+		55EB5ABC208262E2002B3C5B /* dino.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5ABB208262E2002B3C5B /* dino.wav */; };
 		55EB5ABE2082633B002B3C5B /* throw.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5ABD2082633B002B3C5B /* throw.wav */; };
 		55EB5AC1208264B7002B3C5B /* CreateMaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5AC0208264B7002B3C5B /* CreateMaze.swift */; };
 		55EB5AC32082652E002B3C5B /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5AC22082652E002B3C5B /* Block.swift */; };
 		55EB5AC5208267F9002B3C5B /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5AC4208267F9002B3C5B /* GameOver.swift */; };
+		6D702E16B52F2776942FA72E /* Elements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7028B3E5066928EDCC2227 /* Elements.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,14 +41,15 @@
 		55EB5AAA2082486D002B3C5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55EB5AB120824B48002B3C5B /* death.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = death.wav; sourceTree = "<group>"; };
 		55EB5AB220824B48002B3C5B /* bite.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bite.wav; sourceTree = "<group>"; };
-		55EB5AB5208260E8002B3C5B /* chime_up.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chime_up.wav; sourceTree = "<group>"; };
+		55EB5AB5208260E8002B3C5B /* star.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = star.wav; sourceTree = "<group>"; };
 		55EB5AB720826132002B3C5B /* eat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = eat.wav; sourceTree = "<group>"; };
-		55EB5AB920826224002B3C5B /* fireBall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fireBall.wav; sourceTree = "<group>"; };
-		55EB5ABB208262E2002B3C5B /* enemy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = enemy.wav; sourceTree = "<group>"; };
+		55EB5AB920826224002B3C5B /* fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fire.wav; sourceTree = "<group>"; };
+		55EB5ABB208262E2002B3C5B /* dino.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dino.wav; sourceTree = "<group>"; };
 		55EB5ABD2082633B002B3C5B /* throw.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = throw.wav; sourceTree = "<group>"; };
 		55EB5AC0208264B7002B3C5B /* CreateMaze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMaze.swift; sourceTree = "<group>"; };
 		55EB5AC22082652E002B3C5B /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		55EB5AC4208267F9002B3C5B /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		6D7028B3E5066928EDCC2227 /* Elements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Elements.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,9 +100,9 @@
 		55EB5AB020824B25002B3C5B /* Sound Assets */ = {
 			isa = PBXGroup;
 			children = (
-				55EB5ABB208262E2002B3C5B /* enemy.wav */,
-				55EB5AB5208260E8002B3C5B /* chime_up.wav */,
-				55EB5AB920826224002B3C5B /* fireBall.wav */,
+				55EB5ABB208262E2002B3C5B /* dino.wav */,
+				55EB5AB5208260E8002B3C5B /* star.wav */,
+				55EB5AB920826224002B3C5B /* fire.wav */,
 				55EB5AB720826132002B3C5B /* eat.wav */,
 				55EB5AB220824B48002B3C5B /* bite.wav */,
 				55EB5AB120824B48002B3C5B /* death.wav */,
@@ -115,6 +117,7 @@
 				55EB5AC0208264B7002B3C5B /* CreateMaze.swift */,
 				55EB5AC22082652E002B3C5B /* Block.swift */,
 				55EB5AC4208267F9002B3C5B /* GameOver.swift */,
+				6D7028B3E5066928EDCC2227 /* Elements.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -182,13 +185,13 @@
 				55EB5AB320824B48002B3C5B /* death.wav in Resources */,
 				55EB5AB820826132002B3C5B /* eat.wav in Resources */,
 				55EB5AB420824B48002B3C5B /* bite.wav in Resources */,
-				55EB5ABC208262E2002B3C5B /* enemy.wav in Resources */,
+				55EB5ABC208262E2002B3C5B /* dino.wav in Resources */,
 				55EB5A9B2082486A002B3C5B /* GameScene.sks in Resources */,
-				55EB5AB6208260E8002B3C5B /* chime_up.wav in Resources */,
+				55EB5AB6208260E8002B3C5B /* star.wav in Resources */,
 				55EB5AA62082486D002B3C5B /* Assets.xcassets in Resources */,
 				55EB5AA92082486D002B3C5B /* LaunchScreen.storyboard in Resources */,
 				55EB5A9D2082486A002B3C5B /* Actions.sks in Resources */,
-				55EB5ABA20826224002B3C5B /* fireBall.wav in Resources */,
+				55EB5ABA20826224002B3C5B /* fire.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +208,7 @@
 				55EB5AC5208267F9002B3C5B /* GameOver.swift in Sources */,
 				55EB5AA12082486A002B3C5B /* GameViewController.swift in Sources */,
 				55EB5A992082486A002B3C5B /* AppDelegate.swift in Sources */,
+				6D702E16B52F2776942FA72E /* Elements.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
