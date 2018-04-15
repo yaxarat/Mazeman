@@ -11,10 +11,11 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
-    var maze = CreateMaze()
-    var blockCreationTimer = 0
-    var addRockTimer = 0
-    var respawnTimer = 0
+    var maze = PlaceBlock()
+    var allTimers = [Timer]()
+    var itemArray: [[SKSpriteNode]]!
+    var blockCreationTimer = 0, addRockTimer = 0, reviveTimer = 0
+    var rockCount, starCount, heartCount, energyCount: Int!
 
     // Labels
     let starCountLabel  = SKLabelNode(fontNamed: "Avenir")
@@ -29,34 +30,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let dino3 = SKSpriteNode(imageNamed: "dino3")
     let dino4 = SKSpriteNode(imageNamed: "dino4")
     // Sounds
-    let throwSound = SKAudioNode(fileNamed: "throw")
-    let eatSound = SKAudioNode(fileNamed: "eat")
-    let deathSound = SKAudioNode(fileNamed: "death")
-    let starSound = SKAudioNode(fileNamed: "star")
-    let hurtSound = SKAudioNode(fileNamed: "bite")
-    let fireHurtSound = SKAudioNode(fileNamed: "fire")
-    let enemyDeathSound = SKAudioNode(fileNamed: "dino")
-    
-
-    var collectionOfAllTimers = [Timer]()
-
-
-    var itemArray: [[SKSpriteNode]]!
-
-    var starCount: Int!
-    var rockCount: Int!
-    var heartCount: Int!
-    var energyCount: Int!
-
-
+    let throwSound = SKAction.playSoundFileNamed("throw.wav", waitForCompletion:false)
+    let eatSound = SKAction.playSoundFileNamed("eat.wav", waitForCompletion:false)
+    let deathSound = SKAction.playSoundFileNamed("death.wav", waitForCompletion:false)
+    let starSound = SKAction.playSoundFileNamed("star.wav", waitForCompletion:false)
+    let hurtSound = SKAction.playSoundFileNamed("bite.wav", waitForCompletion:false)
+    let fireHurtSound = SKAction.playSoundFileNamed("fire.wav", waitForCompletion:false)
+    let enemyDeathSound = SKAction.playSoundFileNamed("dino.wav", waitForCompletion:false)
 
     override func didMove(to view: SKView) {
-
         self.physicsWorld.contactDelegate = self
 
-        initializeEverything()
-        makeBackground()
-        makeBounderies()
+        initAll()
+
+        initWall()
         setInitialCharacterLoc()
         addFood()
         addStar()
@@ -70,128 +57,89 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         makeStatusBar()
     }
 
+    override func update(_ currentTime: TimeInterval) {}
 
+    func initAll() {
+        maze = PlaceBlock()
+        initTimeAndCount()
+        initItemArray()
+        startTimers()
+        initLabel()
+        initBg()
+    }
 
-    func initializeEverything() {
-        collectionOfAllTimers = [Timer]()
-        maze = CreateMaze()
+    func initTimeAndCount() {
+        allTimers = [Timer]()
         blockCreationTimer = 0
         addRockTimer = 0
+        reviveTimer = 0
         starCount = 0
-        respawnTimer = 0
         rockCount = 10
         heartCount = 3
         energyCount = 100
-        initializeItemArray()
-        startBlockTimer()
-        startGetRockTimer()
-        startEnergyDrainTimer()
-        startDino1MoveTimer()
-        startDino2MoveTimer()
-        startDino3MoveTimer()
-        startDino4MoveTimer()
-        startRespawnTimer()
-        startFireShootTimer()
-        initializeLabels()
-        initializeSounds()
-
     }
 
-    func initializeItemArray() {
+    func initItemArray() {
         itemArray = [[SKSpriteNode]]()
         for i in 0..<maze.blockArray.count {
-            var newRow = [SKSpriteNode](repeatElement(SKSpriteNode(), count: maze.blockArray[i].count))
+            let newRow = [SKSpriteNode](repeatElement(SKSpriteNode(), count: maze.blockArray[i].count))
             itemArray.append(newRow)
         }
     }
 
-    func initializeSounds() {
-        eatSound.autoplayLooped = false
-        deathSound.autoplayLooped = false
-        starSound.autoplayLooped = false
-        hurtSound.autoplayLooped = false
-        fireHurtSound.autoplayLooped = false
-        enemyDeathSound.autoplayLooped = false
-        throwSound.autoplayLooped = false
+    func initLabel() {
+        starCountLabel.fontSize = 30
+        rockCountLabel.fontSize = 30
+        heartCountLabel.fontSize = 30
+        energyCountLabel.fontSize = 30
+        statusBarLabel.fontSize = 30
 
-        addChild(eatSound)
-        addChild(deathSound)
-        addChild(starSound)
-        addChild(hurtSound)
-        addChild(fireHurtSound)
-        addChild(enemyDeathSound)
-        addChild(throwSound)
-    }
-
-    func initializeLabels() {
-        starCountLabel.fontSize = 35
-        rockCountLabel.fontSize = 35
-        heartCountLabel.fontSize = 35
-        energyCountLabel.fontSize = 35
-        statusBarLabel.fontSize = 35
-
-
-        starCountLabel.fontColor = SKColor.white
-        rockCountLabel.fontColor = SKColor.white
-        heartCountLabel.fontColor = SKColor.white
-        energyCountLabel.fontColor = SKColor.white
+        starCountLabel.fontColor = SKColor.black
+        rockCountLabel.fontColor = SKColor.black
+        heartCountLabel.fontColor = SKColor.black
+        energyCountLabel.fontColor = SKColor.black
         statusBarLabel.fontColor = SKColor.white
 
         starCountLabel.text = String(starCount)
         rockCountLabel.text = String(rockCount)
         heartCountLabel.text = String(heartCount)
         energyCountLabel.text = String(energyCount)
-        statusBarLabel.text = "Welcome to MazeMan"
+        statusBarLabel.text = "Survive the MazeMan"
 
 
     }
 
-
-    func startBlockTimer() {
+    func startTimers() {
+        // For block
         let blockCreationTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(addRandomBlock(sender:)), userInfo: nil, repeats: true)
-        collectionOfAllTimers.append(blockCreationTimer)
-    }
-
-    func startGetRockTimer() {
+        allTimers.append(blockCreationTimer)
+        // TODO: COMMENT THESE
         let getRocksTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(addRocks(sender:)), userInfo: nil, repeats: true)
-        collectionOfAllTimers.append(getRocksTimer)
-    }
-
-    func startEnergyDrainTimer() {
+        allTimers.append(getRocksTimer)
+        //
         let drainTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(drainEnergy(sender:)), userInfo: nil, repeats: true)
-        collectionOfAllTimers.append(drainTimer)
-    }
-
-    func startDino1MoveTimer() {
+        allTimers.append(drainTimer)
+        //
         let timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dino1Moves(sender:)), userInfo: nil, repeats: true)
-        collectionOfAllTimers.append(timer1)
-    }
-
-    func startDino2MoveTimer() {
+        allTimers.append(timer1)
+        //
         let timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dino2Moves(sender:)), userInfo: nil, repeats: true)
-        collectionOfAllTimers.append(timer2)
-    }
-
-    func startDino3MoveTimer() {
+        allTimers.append(timer2)
+        //
         let timer3 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dino3Moves(sender:)), userInfo: nil, repeats: true)
-        collectionOfAllTimers.append(timer3)
-    }
-
-    func startDino4MoveTimer() {
+        allTimers.append(timer3)
+        //
         let timer4 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dino4Moves(sender:)), userInfo: nil, repeats: true)
-        collectionOfAllTimers.append(timer4)
-    }
-
-    func startFireShootTimer() {
+        allTimers.append(timer4)
+        //
         let timerfire = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(throwFire(sender:)), userInfo: nil, repeats: true)
-        collectionOfAllTimers.append(timerfire)
+        allTimers.append(timerfire)
+        //
+        let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(respawn(sender:)), userInfo: nil, repeats: true)
+        allTimers.append(timer)
     }
 
-    func startRespawnTimer() {
-        let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(respawn(sender:)), userInfo: nil, repeats: true)
-        collectionOfAllTimers.append(timer)
-    }
-    func makeBackground() {
+    func initBg() {
         let background = SKSpriteNode(imageNamed: "bg")
         background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         background.size = self.size
@@ -199,7 +147,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
 
-    func makeBounderies() {
+    func initWall() {
         let bottom = CGFloat(64 / 2)
         let top = CGFloat(1024 - 64 / 2)
         let top1 = CGFloat(top - 64)
@@ -341,7 +289,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func addDino1(){
-        dino1 = SKSpriteNode(imageNamed: "dino1")
         let waterSpawn = Int(arc4random_uniform(2))
         var xPos: CGFloat = 0
         dino1.size = CGSize(width: 64, height: 64)
@@ -361,7 +308,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func addDino2(){
-        dino2 = SKSpriteNode(imageNamed: "dino2")
 
         let spawn = CGFloat(arc4random_uniform(13))
         dino2.size = CGSize(width: 64, height: 64)
@@ -378,7 +324,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func addDino3(){
-        dino3 = SKSpriteNode(imageNamed: "dino3")
 
         dino3.size = CGSize(width: 64, height: 64)
 
@@ -394,7 +339,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func addDino4(){
-        dino4 = SKSpriteNode(imageNamed: "dino4")
 
         dino4.size = CGSize(width: 64, height: 64)
         dino4.position = CGPoint(x: dino4.frame.size.width/2+10, y: dino4.frame.size.height/2 + (64*13 + 40))
@@ -405,9 +349,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     @objc func respawn(sender: Timer) {
-        respawnTimer += 1
-        if respawnTimer == 5 {
-            respawnTimer = 0
+        reviveTimer += 1
+        if reviveTimer == 5 {
+            reviveTimer = 0
             checkForDinos()
         }
     }
@@ -542,7 +486,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             rock.physicsBody?.applyImpulse(vector)
             rockCount! -= 1
             updateLabelCounts()
-            throwSound.run(SKAction.play())
+            run(throwSound)
         }
 
 
@@ -815,7 +759,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else if (damage < energyCount) {
             energyCount! -= damage
         } else {
-            deathSound.run(SKAction.play())
+            run(deathSound)
             energyCount = 0
             gameOver()
             print("Game Over")
@@ -831,7 +775,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 energyCount=100
             } else {
                 print("Game Over")
-                deathSound.run(SKAction.play())
+                run(deathSound)
                 gameOver()
                 sender.invalidate()
                 invalidateAllTimers()
@@ -860,7 +804,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Food) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Food){
-            eatSound.run(SKAction.play())
+            run(eatSound)
             addEnergy()
             statusBarLabel.text = "Gained 50 Energy"
             searchAndDestroyItem(item: "food")
@@ -868,38 +812,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Star) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Star){
-            starSound.run(SKAction.play())
+            run(starSound)
             searchAndDestroyItem(item: "star")
             addStarScore()
         }
 
         if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Fire) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Fire){
-            fireHurtSound.run(SKAction.play())
+            run(fireHurtSound)
             hurtByDino(whichOne: "fire")
         }
 
         if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Water) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Water){
             invalidateAllTimers()
-            deathSound.run(SKAction.play())
+            run(deathSound)
             gameOver()
         }
 
         //*******************dino1****************
         if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Beast0) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Beast0){
             hurtByDino(whichOne: "dino1")
-            hurtSound.run(SKAction.play())
+            run(hurtSound)
 
         }
 
         if (contact.bodyA.categoryBitMask == ElementNames.Rock && contact.bodyB.categoryBitMask == ElementNames.Beast0) || (contact.bodyB.categoryBitMask == ElementNames.Rock && contact.bodyA.categoryBitMask == ElementNames.Beast0){
-            enemyDeathSound.run(SKAction.play())
+            run(enemyDeathSound)
             dino1.removeFromParent()
             statusBarLabel.text = "dino 1 killed"
 
         }
 
         if (contact.bodyA.categoryBitMask == ElementNames.Beast0 && contact.bodyB.categoryBitMask == ElementNames.Food) || (contact.bodyB.categoryBitMask == ElementNames.Beast0 && contact.bodyA.categoryBitMask == ElementNames.Food){
-            eatSound.run(SKAction.play())
+            run(eatSound)
             searchAndDestroyItem(item: "food")
 
         }
@@ -908,18 +852,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Beast1) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Beast1){
             hurtByDino(whichOne: "dino2")
-            hurtSound.run(SKAction.play())
+            run(hurtSound)
         }
 
         if (contact.bodyA.categoryBitMask == ElementNames.Rock && contact.bodyB.categoryBitMask == ElementNames.Beast1) || (contact.bodyB.categoryBitMask == ElementNames.Rock && contact.bodyA.categoryBitMask == ElementNames.Beast1){
-            enemyDeathSound.run(SKAction.play())
+            run(enemyDeathSound)
             dino2.removeFromParent()
             statusBarLabel.text = "dino2 killed"
 
         }
 
         if (contact.bodyA.categoryBitMask == ElementNames.Beast1 && contact.bodyB.categoryBitMask == ElementNames.Food) || (contact.bodyB.categoryBitMask == ElementNames.Beast1 && contact.bodyA.categoryBitMask == ElementNames.Food){
-            eatSound.run(SKAction.play())
+            run(eatSound)
             searchAndDestroyItem(item: "food")
 
         }
@@ -928,7 +872,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Beast2) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Beast2){
             hurtByDino(whichOne: "dino3")
-            hurtSound.run(SKAction.play())
+            run(hurtSound)
 
 
         }
@@ -950,14 +894,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         if (contact.bodyA.categoryBitMask == ElementNames.Rock && contact.bodyB.categoryBitMask == ElementNames.Beast2) || (contact.bodyB.categoryBitMask == ElementNames.Rock && contact.bodyA.categoryBitMask == ElementNames.Beast2){
-            enemyDeathSound.run(SKAction.play())
+            run(enemyDeathSound)
             dino3.removeFromParent()
             statusBarLabel.text = "dino3 killed"
 
         }
 
         if (contact.bodyA.categoryBitMask == ElementNames.Beast2 && contact.bodyB.categoryBitMask == ElementNames.Food) || (contact.bodyB.categoryBitMask == ElementNames.Beast2 && contact.bodyA.categoryBitMask == ElementNames.Food){
-            eatSound.run(SKAction.play())
+            run(eatSound)
             searchAndDestroyItem(item: "food")
 
         }
@@ -971,7 +915,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
 
     func invalidateAllTimers() {
-        for timer in collectionOfAllTimers {
+        for timer in allTimers {
             timer.invalidate()
         }
     }
@@ -998,18 +942,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
 
     func gameOver(){
-
         let flipTransition = SKTransition.doorsCloseHorizontal(withDuration: 1.0)
         let gameOverScene = GameOver(size: self.size, starCount: starCount)
         gameOverScene.scaleMode = .aspectFill
-
         self.view?.presentScene(gameOverScene, transition: flipTransition)
-
-
-    }
-
-
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
     }
 }

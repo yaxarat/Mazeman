@@ -22,7 +22,7 @@
 		55EB5ABA20826224002B3C5B /* fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5AB920826224002B3C5B /* fire.wav */; };
 		55EB5ABC208262E2002B3C5B /* dino.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5ABB208262E2002B3C5B /* dino.wav */; };
 		55EB5ABE2082633B002B3C5B /* throw.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55EB5ABD2082633B002B3C5B /* throw.wav */; };
-		55EB5AC1208264B7002B3C5B /* CreateMaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5AC0208264B7002B3C5B /* CreateMaze.swift */; };
+		55EB5AC1208264B7002B3C5B /* PlaceBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5AC0208264B7002B3C5B /* PlaceBlock.swift */; };
 		55EB5AC32082652E002B3C5B /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5AC22082652E002B3C5B /* Block.swift */; };
 		55EB5AC5208267F9002B3C5B /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB5AC4208267F9002B3C5B /* GameOver.swift */; };
 		6D702E16B52F2776942FA72E /* Elements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7028B3E5066928EDCC2227 /* Elements.swift */; };
@@ -46,7 +46,7 @@
 		55EB5AB920826224002B3C5B /* fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fire.wav; sourceTree = "<group>"; };
 		55EB5ABB208262E2002B3C5B /* dino.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dino.wav; sourceTree = "<group>"; };
 		55EB5ABD2082633B002B3C5B /* throw.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = throw.wav; sourceTree = "<group>"; };
-		55EB5AC0208264B7002B3C5B /* CreateMaze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMaze.swift; sourceTree = "<group>"; };
+		55EB5AC0208264B7002B3C5B /* PlaceBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceBlock.swift; sourceTree = "<group>"; };
 		55EB5AC22082652E002B3C5B /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		55EB5AC4208267F9002B3C5B /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		6D7028B3E5066928EDCC2227 /* Elements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Elements.swift; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		55EB5ABF208263DD002B3C5B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				55EB5AC0208264B7002B3C5B /* CreateMaze.swift */,
+				55EB5AC0208264B7002B3C5B /* PlaceBlock.swift */,
 				55EB5AC22082652E002B3C5B /* Block.swift */,
 				55EB5AC4208267F9002B3C5B /* GameOver.swift */,
 				6D7028B3E5066928EDCC2227 /* Elements.swift */,
@@ -202,7 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55EB5AC1208264B7002B3C5B /* CreateMaze.swift in Sources */,
+				55EB5AC1208264B7002B3C5B /* PlaceBlock.swift in Sources */,
 				55EB5A9F2082486A002B3C5B /* GameScene.swift in Sources */,
 				55EB5AC32082652E002B3C5B /* Block.swift in Sources */,
 				55EB5AC5208267F9002B3C5B /* GameOver.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  CreateMaze.swift
+//  PlaceBlock.swift
 //  MazeMan
 //
 //  Created by Yashar Atajan on 4/11/18.
@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class CreateMaze {
+class PlaceBlock {
     var blockArray: [[Block]] = [[Block]]()
 
     init() {

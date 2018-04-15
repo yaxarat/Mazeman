@@ -19,7 +19,7 @@ class GameViewController: UIViewController {
             if let screen = GameScene(size: self.view.bounds.size) as? GameScene {
                 screen.scaleMode = .aspectFill
                 view.presentScene(screen)
-                view.preferredFramesPerSecond = 60
+                view.preferredFramesPerSecond = 120
             }
 
             view.ignoresSiblingOrder = false
