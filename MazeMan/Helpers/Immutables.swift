@@ -20,6 +20,7 @@ let dino2 = SKSpriteNode(imageNamed: "dino2")
 let dino3 = SKSpriteNode(imageNamed: "dino3")
 let dino4 = SKSpriteNode(imageNamed: "dino4")
 let background = SKSpriteNode(imageNamed: "bg")
+let background2 = SKSpriteNode(imageNamed: "bg2")
 
 // Sounds
 let throwSound = SKAction.playSoundFileNamed("throw.wav", waitForCompletion:false)

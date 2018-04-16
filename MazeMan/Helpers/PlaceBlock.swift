@@ -13,20 +13,14 @@ class PlaceBlock {
     var blockArray: [[Block]] = [[Block]]()
 
     init() {
-        setupGrid()
-    }
-
-
-    func setupGrid(){
-
         for i in 0...20 {
             var newArray = [Block]()
             for j in 0...10 {
-                var val = Block()
-                val.yCoordinate = i
-                val.xCoordinate = j
-                val.occupied = false
-                newArray.append(val)
+                var temp = Block()
+                temp.yCoordinate = i
+                temp.xCoordinate = j
+                temp.occupied = false
+                newArray.append(temp)
             }
             blockArray.append(newArray)
         }

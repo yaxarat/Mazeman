@@ -13,60 +13,79 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_663BF93D-AF22-49CB-A708-3B59DFF88488" />
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="GameOver.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/GameOver.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1440">
+              <caret line="96" column="76" lean-forward="false" selection-start-line="96" selection-start-column="76" selection-end-line="96" selection-end-column="76" />
+              <folding>
+                <element signature="e#142#154#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="GameScene.swift" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MazeMan/GameScene.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="566">
-              <caret line="406" column="5" lean-forward="false" selection-start-line="406" selection-start-column="5" selection-end-line="406" selection-end-column="5" />
+            <state relative-caret-position="771">
+              <caret line="154" column="58" lean-forward="false" selection-start-line="154" selection-start-column="58" selection-end-line="154" selection-end-column="58" />
               <folding>
                 <element signature="e#0#2#0" expanded="false" />
-                <element signature="e#143#159#0" expanded="true" />
                 <element signature="e#582#699#0" expanded="false" />
-                <element signature="e#763#1027#0" expanded="false" />
                 <element signature="e#1033#1268#0" expanded="false" />
                 <element signature="e#1274#1537#0" expanded="false" />
                 <element signature="e#1543#2199#0" expanded="false" />
                 <element signature="e#2205#4070#0" expanded="false" />
                 <element signature="e#4076#4251#0" expanded="false" />
-                <element signature="e#4257#6224#0" expanded="false" />
-                <element signature="e#6230#6562#0" expanded="false" />
-                <element signature="e#6568#7598#0" expanded="false" />
-                <element signature="e#7604#7997#0" expanded="false" />
-                <element signature="e#8003#8212#0" expanded="false" />
-                <element signature="e#8218#8374#0" expanded="false" />
-                <element signature="e#8380#8968#0" expanded="false" />
-                <element signature="e#8996#9693#0" expanded="false" />
-                <element signature="e#9699#10270#0" expanded="false" />
-                <element signature="e#10276#10762#0" expanded="false" />
-                <element signature="e#10768#11007#0" expanded="false" />
-                <element signature="e#11013#11069#0" expanded="false" />
-                <element signature="e#11075#11131#0" expanded="false" />
-                <element signature="e#11137#11302#0" expanded="false" />
-                <element signature="e#11308#11603#0" expanded="false" />
-                <element signature="e#11609#11829#0" expanded="false" />
-                <element signature="e#11835#12144#0" expanded="false" />
-                <element signature="e#12150#12636#0" expanded="false" />
-                <element signature="e#12642#13556#0" expanded="false" />
-                <element signature="e#13562#14063#0" expanded="false" />
-                <element signature="e#14069#15001#0" expanded="false" />
-                <element signature="e#15007#16025#0" expanded="false" />
-                <element signature="e#16031#16529#0" expanded="false" />
-                <element signature="e#16535#16769#0" expanded="false" />
-                <element signature="e#16775#17326#0" expanded="false" />
-                <element signature="e#17332#18155#0" expanded="false" />
-                <element signature="e#18161#18414#0" expanded="false" />
-                <element signature="e#18420#20740#0" expanded="false" />
-                <element signature="e#20746#21185#0" expanded="false" />
-                <element signature="e#21191#23748#0" expanded="false" />
-                <element signature="e#23754#24087#0" expanded="false" />
-                <element signature="e#24093#24491#0" expanded="false" />
-                <element signature="e#24497#24902#0" expanded="false" />
-                <element signature="e#24908#31329#0" expanded="false" />
-                <element signature="e#31335#31409#0" expanded="false" />
-                <element signature="e#31415#31593#0" expanded="false" />
-                <element signature="e#31599#31698#0" expanded="false" />
-                <element signature="e#31704#32349#0" expanded="false" />
+                <element signature="e#6688#7718#0" expanded="false" />
+                <element signature="e#7724#8117#0" expanded="false" />
+                <element signature="e#8123#8332#0" expanded="false" />
+                <element signature="e#8338#8494#0" expanded="false" />
+                <element signature="e#8500#9088#0" expanded="false" />
+                <element signature="e#9094#9791#0" expanded="false" />
+                <element signature="e#9797#10368#0" expanded="false" />
+                <element signature="e#10374#10860#0" expanded="false" />
+                <element signature="e#10866#11105#0" expanded="false" />
+                <element signature="e#11111#11167#0" expanded="false" />
+                <element signature="e#11173#11229#0" expanded="false" />
+                <element signature="e#11235#11400#0" expanded="false" />
+                <element signature="e#11406#11701#0" expanded="false" />
+                <element signature="e#11707#11927#0" expanded="false" />
+                <element signature="e#11933#12242#0" expanded="false" />
+                <element signature="e#12248#12734#0" expanded="false" />
+                <element signature="e#12740#13654#0" expanded="false" />
+                <element signature="e#13660#14161#0" expanded="false" />
+                <element signature="e#14167#15099#0" expanded="false" />
+                <element signature="e#15105#16123#0" expanded="false" />
+                <element signature="e#16129#16627#0" expanded="false" />
+                <element signature="e#16633#16867#0" expanded="false" />
+                <element signature="e#16873#17424#0" expanded="false" />
+                <element signature="e#17430#18253#0" expanded="false" />
+                <element signature="e#18259#18512#0" expanded="false" />
+                <element signature="e#18518#20838#0" expanded="false" />
+                <element signature="e#20844#21283#0" expanded="false" />
+                <element signature="e#21289#23846#0" expanded="false" />
+                <element signature="e#23852#24185#0" expanded="false" />
+                <element signature="e#24191#24589#0" expanded="false" />
+                <element signature="e#24595#25000#0" expanded="false" />
+                <element signature="e#25006#31427#0" expanded="false" />
+                <element signature="e#31433#31507#0" expanded="false" />
+                <element signature="e#31513#31691#0" expanded="false" />
+                <element signature="e#31697#31796#0" expanded="false" />
+                <element signature="e#31802#32447#0" expanded="false" />
+                <element signature="e#32453#32746#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Immutables.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Immutables.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -101,11 +120,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/MazeMan/Helpers/CreateMaze.swift" />
-        <option value="$PROJECT_DIR$/MazeMan/GameViewController.swift" />
-        <option value="$PROJECT_DIR$/MazeMan/Helpers/PlaceBlock.swift" />
         <option value="$PROJECT_DIR$/MazeMan/Helpers/Block.swift" />
-        <option value="$PROJECT_DIR$/MazeMan/Helpers/Immutables.swift" />
         <option value="$PROJECT_DIR$/MazeMan/Helpers/Elements.swift" />
+        <option value="$PROJECT_DIR$/MazeMan/GameViewController.swift" />
+        <option value="$PROJECT_DIR$/MazeMan/Helpers/Immutables.swift" />
+        <option value="$PROJECT_DIR$/MazeMan/Helpers/GameOver.swift" />
+        <option value="$PROJECT_DIR$/MazeMan/Helpers/PlaceBlock.swift" />
         <option value="$PROJECT_DIR$/MazeMan/GameScene.swift" />
       </list>
     </option>
@@ -197,12 +217,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1523723474135</updated>
-      <workItem from="1523723475795" duration="24723000" />
+      <workItem from="1523723475795" duration="28096000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24723000" />
+    <option name="totallyTimeSpent" value="28096000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="448" y="-1440" width="1492" height="1440" extended-state="0" />
@@ -239,24 +259,26 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/MazeMan/GameViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="21" column="51" lean-forward="false" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
+        <state relative-caret-position="300">
+          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/GameOver.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="96" column="76" lean-forward="false" selection-start-line="96" selection-start-column="76" selection-end-line="96" selection-end-column="76" />
+          <folding>
+            <element signature="e#142#154#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/PlaceBlock.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="37" column="1" lean-forward="true" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Block.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state relative-caret-position="255">
+          <caret line="18" column="34" lean-forward="true" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -269,76 +291,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Immutables.swift">
+    <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Block.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="27" lean-forward="false" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
-          <folding>
-            <element signature="e#108#125#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/GameOver.swift">
+    <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Immutables.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="255">
+          <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MazeMan/GameScene.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="406" column="5" lean-forward="false" selection-start-line="406" selection-start-column="5" selection-end-line="406" selection-end-column="5" />
+        <state relative-caret-position="771">
+          <caret line="154" column="58" lean-forward="false" selection-start-line="154" selection-start-column="58" selection-end-line="154" selection-end-column="58" />
           <folding>
             <element signature="e#0#2#0" expanded="false" />
-            <element signature="e#143#159#0" expanded="true" />
             <element signature="e#582#699#0" expanded="false" />
-            <element signature="e#763#1027#0" expanded="false" />
             <element signature="e#1033#1268#0" expanded="false" />
             <element signature="e#1274#1537#0" expanded="false" />
             <element signature="e#1543#2199#0" expanded="false" />
             <element signature="e#2205#4070#0" expanded="false" />
             <element signature="e#4076#4251#0" expanded="false" />
-            <element signature="e#4257#6224#0" expanded="false" />
-            <element signature="e#6230#6562#0" expanded="false" />
-            <element signature="e#6568#7598#0" expanded="false" />
-            <element signature="e#7604#7997#0" expanded="false" />
-            <element signature="e#8003#8212#0" expanded="false" />
-            <element signature="e#8218#8374#0" expanded="false" />
-            <element signature="e#8380#8968#0" expanded="false" />
-            <element signature="e#8996#9693#0" expanded="false" />
-            <element signature="e#9699#10270#0" expanded="false" />
-            <element signature="e#10276#10762#0" expanded="false" />
-            <element signature="e#10768#11007#0" expanded="false" />
-            <element signature="e#11013#11069#0" expanded="false" />
-            <element signature="e#11075#11131#0" expanded="false" />
-            <element signature="e#11137#11302#0" expanded="false" />
-            <element signature="e#11308#11603#0" expanded="false" />
-            <element signature="e#11609#11829#0" expanded="false" />
-            <element signature="e#11835#12144#0" expanded="false" />
-            <element signature="e#12150#12636#0" expanded="false" />
-            <element signature="e#12642#13556#0" expanded="false" />
-            <element signature="e#13562#14063#0" expanded="false" />
-            <element signature="e#14069#15001#0" expanded="false" />
-            <element signature="e#15007#16025#0" expanded="false" />
-            <element signature="e#16031#16529#0" expanded="false" />
-            <element signature="e#16535#16769#0" expanded="false" />
-            <element signature="e#16775#17326#0" expanded="false" />
-            <element signature="e#17332#18155#0" expanded="false" />
-            <element signature="e#18161#18414#0" expanded="false" />
-            <element signature="e#18420#20740#0" expanded="false" />
-            <element signature="e#20746#21185#0" expanded="false" />
-            <element signature="e#21191#23748#0" expanded="false" />
-            <element signature="e#23754#24087#0" expanded="false" />
-            <element signature="e#24093#24491#0" expanded="false" />
-            <element signature="e#24497#24902#0" expanded="false" />
-            <element signature="e#24908#31329#0" expanded="false" />
-            <element signature="e#31335#31409#0" expanded="false" />
-            <element signature="e#31415#31593#0" expanded="false" />
-            <element signature="e#31599#31698#0" expanded="false" />
-            <element signature="e#31704#32349#0" expanded="false" />
+            <element signature="e#6688#7718#0" expanded="false" />
+            <element signature="e#7724#8117#0" expanded="false" />
+            <element signature="e#8123#8332#0" expanded="false" />
+            <element signature="e#8338#8494#0" expanded="false" />
+            <element signature="e#8500#9088#0" expanded="false" />
+            <element signature="e#9094#9791#0" expanded="false" />
+            <element signature="e#9797#10368#0" expanded="false" />
+            <element signature="e#10374#10860#0" expanded="false" />
+            <element signature="e#10866#11105#0" expanded="false" />
+            <element signature="e#11111#11167#0" expanded="false" />
+            <element signature="e#11173#11229#0" expanded="false" />
+            <element signature="e#11235#11400#0" expanded="false" />
+            <element signature="e#11406#11701#0" expanded="false" />
+            <element signature="e#11707#11927#0" expanded="false" />
+            <element signature="e#11933#12242#0" expanded="false" />
+            <element signature="e#12248#12734#0" expanded="false" />
+            <element signature="e#12740#13654#0" expanded="false" />
+            <element signature="e#13660#14161#0" expanded="false" />
+            <element signature="e#14167#15099#0" expanded="false" />
+            <element signature="e#15105#16123#0" expanded="false" />
+            <element signature="e#16129#16627#0" expanded="false" />
+            <element signature="e#16633#16867#0" expanded="false" />
+            <element signature="e#16873#17424#0" expanded="false" />
+            <element signature="e#17430#18253#0" expanded="false" />
+            <element signature="e#18259#18512#0" expanded="false" />
+            <element signature="e#18518#20838#0" expanded="false" />
+            <element signature="e#20844#21283#0" expanded="false" />
+            <element signature="e#21289#23846#0" expanded="false" />
+            <element signature="e#23852#24185#0" expanded="false" />
+            <element signature="e#24191#24589#0" expanded="false" />
+            <element signature="e#24595#25000#0" expanded="false" />
+            <element signature="e#25006#31427#0" expanded="false" />
+            <element signature="e#31433#31507#0" expanded="false" />
+            <element signature="e#31513#31691#0" expanded="false" />
+            <element signature="e#31697#31796#0" expanded="false" />
+            <element signature="e#31802#32447#0" expanded="false" />
+            <element signature="e#32453#32746#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -150,9 +150,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         boundBottom2.physicsBody?.isDynamic = false
 
         doesCollide(Element: "border" , node: boundTop)
-        doesCollide(Element: "border" , node: boundBottom)
         doesCollide(Element: "border" , node: boundLeft)
         doesCollide(Element: "border" , node: boundRight)
+        doesCollide(Element: "border" , node: boundBottom)
+        doesCollide(Element: "border" , node: boundBottom1)
+        doesCollide(Element: "border" , node: boundBottom2)
 
         makeBoundary(yCoordinate: CGFloat(64 / 2))
         makeBoundary(yCoordinate: CGFloat(1024 - 64 / 2))
@@ -247,7 +249,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         maze.blockArray[0][0].occupied = true
     }
 
-    //TODO: FIX THESE
     func addDino1(){
         let waterSpawn = Int(arc4random_uniform(2))
         var xPos: CGFloat = 0
@@ -832,7 +833,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func gameOver(){
-        let transition = SKTransition.doorsCloseHorizontal(withDuration: 2)
+        let transition = SKTransition.doorsCloseHorizontal(withDuration: 1.3)
         let gameOverScene = GameOver(size: self.size, starCount: starCount)
         gameOverScene.scaleMode = .aspectFill
         self.view?.presentScene(gameOverScene, transition: transition)

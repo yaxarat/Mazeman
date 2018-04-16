@@ -10,105 +10,77 @@ import UIKit
 import SpriteKit
 
 class GameOver: SKScene {
-    
     var button: UIButton!
     var starCount: Int!
     var highScores: [Int]?
-    let score = SKLabelNode(fontNamed: "Chalkduster")
+    let highScoreArray: [Int] = [0, 0, 0]
+    let score = SKLabelNode(fontNamed: "Avenir")
+    let currentScoreLb = SKLabelNode(fontNamed: "Avenir")
+    let flipTransition = SKTransition.doorsCloseHorizontal(withDuration: 2)
     
     init(size: CGSize, starCount: Int!) {
         super.init(size: size)
-        
         self.starCount = starCount
-        
-        let gameOverLabel = SKLabelNode(fontNamed: "Chalkduster")
-        gameOverLabel.text = ("GameOver")
-        score.text = String(starCount!)
-        
-        gameOverLabel.fontSize = 60
-        score.fontSize = 40
-        
-        gameOverLabel.position = CGPoint(x: size.width/2, y: size.height/2 + 100)
-        score.position = CGPoint(x: size.width/2, y: size.height/2 )
-        
-        self.addChild(gameOverLabel)
+        self.addChild(currentScoreLb)
         self.addChild(score)
-        
-        let flipTransition = SKTransition.doorsCloseHorizontal(withDuration: 1.0)
         let newScene = GameScene(size: self.size)
         newScene.scaleMode = .aspectFill
-        
         self.view?.presentScene(newScene, transition: flipTransition)
-        
-        
-        
-        //    button.removeFromSuperview()
-        
+
+        currentScoreLb.fontSize = 80
+        currentScoreLb.text = ("Your score was: \(starCount!)")
+        currentScoreLb.position = CGPoint(x: size.width/2, y: size.height/2 + 100)
+        score.text = String(starCount!)
+        score.fontSize = 55
+        score.position = CGPoint(x: size.width/2, y: size.height/2)
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+
+    override func didMove(to view: SKView) {
+        background2.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
+        background2.size = self.size
+        background2.alpha = 0.3
+        addChild(background2)
+
+        button = UIButton(frame: CGRect(x: self.size.width/2 - 142, y: size.height/2 + 200, width: 300, height: 100))
+        button.titleLabel?.font = UIFont(name: "Avenir", size: 45)
+        button.setTitle("Try again", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.addTarget(self, action: #selector(goBack(sender:)), for: .touchUpInside)
+
+        self.view?.addSubview(button)
+
+        highScores = scoreArray()
+        updateScore(currentScore: self.starCount)
+        updateScoreLb()
     }
-    
-    
-    func lookAtScores() -> [Int] {
-        let newArray: [Int] = [0, 0, 0]
+
+    func scoreArray() -> [Int] {
         if let highScoresDefault = UserDefaults.standard.object(forKey: "HighScores") as? [Int] {
-            print(highScoresDefault)
             return (highScoresDefault)
-            
         } else {
-            UserDefaults.standard.set(newArray, forKey: "HighScores")
-            return(newArray)
+            UserDefaults.standard.set(highScoreArray, forKey: "HighScores")
+            return(highScoreArray)
         }
     }
     
-    func updateScore(ourScore: Int) {
-        //        resetDefaults()
+    func updateScore(currentScore: Int) {
         for i in 0..<highScores!.count {
-            if ourScore >= highScores![i] {
-                highScores?.insert(ourScore, at: i)
+            if currentScore >= highScores![i] {
+                highScores?.insert(currentScore, at: i)
                 highScores?.remove(at: 3)
                 break
             }
         }
-        //   UserDefaults.standard.set(highScores!, forKey: "HighScores")
-        updateDatabase()
+        updateArray()
     }
     
-    
-    func resetDefaults() {
-        UserDefaults.standard.removeObject(forKey: "HighScores")
-        UserDefaults.standard.synchronize()
-    }
-    
-    func updateDatabase(){
+    func updateArray(){
         //  let highScoreData = NSKeyedArchiver.archivedData(withRootObject: [Int](highScores!))
         UserDefaults.standard.set([Int](highScores!), forKey: "HighScores")
         UserDefaults.standard.synchronize()
     }
-    
-    
-    
-    override func didMove(to view: SKView) {
-        button = UIButton(frame: CGRect(x: self.size.width/2 - 142, y: size.height/2 + 50, width: 300, height: 100))
-        button.titleLabel?.font = UIFont(name: "chalkDuster", size: 30)
-        button.setTitle("Begin New Game", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.addTarget(self, action: #selector(goBack(sender:)), for: .touchUpInside)
-        
-        self.view?.addSubview(button)
-        //       resetDefaults()
-        highScores = lookAtScores()
-        updateScore(ourScore: self.starCount)
-        scoreLabelUpdate()
-        
-        
-        
-        
-    }
-    
-    func scoreLabelUpdate() {
+
+    func updateScoreLb() {
         var scoreString: String = "HighScores "
         for i in 0..<highScores!.count  {
             if i < highScores!.count - 1 {
@@ -117,19 +89,19 @@ class GameOver: SKScene {
             } else {
                 scoreString = scoreString + String(highScores![i])
             }
-            
         }
         score.text = scoreString
     }
     
     @objc func goBack(sender: UIButton) {
-        let flipTransition = SKTransition.doorsCloseHorizontal(withDuration: 1.0)
+        let transition = SKTransition.doorsCloseHorizontal(withDuration: 1.3)
         let newScene = GameScene(size: self.size)
         newScene.scaleMode = .aspectFill
-        
-        self.view?.presentScene(newScene, transition: flipTransition)
+        self.view?.presentScene(newScene, transition: transition)
         button.removeFromSuperview()
     }
-    
-    
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

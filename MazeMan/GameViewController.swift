@@ -21,10 +21,6 @@ class GameViewController: UIViewController {
                 view.presentScene(screen)
                 view.preferredFramesPerSecond = 120
             }
-
-            view.ignoresSiblingOrder = false
-            view.showsFPS = true
-            view.showsNodeCount = true
         }
     }
 }
