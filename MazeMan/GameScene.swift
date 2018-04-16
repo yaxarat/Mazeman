@@ -18,7 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var randXCoordinate = Int(arc4random_uniform(20))
     var randYCoordinate = Int(arc4random_uniform(10))
     var addBlockTimer = 0, addRockTimer = 0, respawnTimer = 0
-    var rockCount, starCount, heartCount, energyCount: Int!
+    var rockCount, starCount, heartCount, remainingEnergy: Int!
 
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -53,7 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         starCount = 0
         rockCount = 10
         heartCount = 3
-        energyCount = 100
+        remainingEnergy = 100
     }
 
     func initItemArray() {
@@ -80,7 +80,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         starLabel.text = String(starCount)
         rockLabel.text = String(rockCount)
         heartLabel.text = String(heartCount)
-        energyLabel.text = String(energyCount)
+        energyLabel.text = String(remainingEnergy)
         statusBarLabel.text = "Survive the MazeMan"
     }
 
@@ -92,7 +92,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let getRocksTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(addRocks(sender:)), userInfo: nil, repeats: true)
         allTimers.append(getRocksTimer)
         // For energy
-        let drainTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(drainEnergy(sender:)), userInfo: nil, repeats: true)
+        let drainTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(attrition(sender:)), userInfo: nil, repeats: true)
         allTimers.append(drainTimer)
         // For dino
         let timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(moveDino1(sender:)), userInfo: nil, repeats: true)
@@ -104,7 +104,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let timer3 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(moveDino3(sender:)), userInfo: nil, repeats: true)
         allTimers.append(timer3)
         // For dino
-        let timer4 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dino4Moves(sender:)), userInfo: nil, repeats: true)
+        let timer4 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(moveDino4(sender:)), userInfo: nil, repeats: true)
         allTimers.append(timer4)
         // For dino4 attack
         let timerfire = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(throwFire(sender:)), userInfo: nil, repeats: true)
@@ -149,10 +149,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(boundBottom2)
         boundBottom2.physicsBody?.isDynamic = false
 
-        doesCollide(item: "border" , node: boundTop)
-        doesCollide(item: "border" , node: boundBottom)
-        doesCollide(item: "border" , node: boundLeft)
-        doesCollide(item: "border" , node: boundRight)
+        doesCollide(Element: "border" , node: boundTop)
+        doesCollide(Element: "border" , node: boundBottom)
+        doesCollide(Element: "border" , node: boundLeft)
+        doesCollide(Element: "border" , node: boundRight)
 
         makeBoundary(yCoordinate: CGFloat(64 / 2))
         makeBoundary(yCoordinate: CGFloat(1024 - 64 / 2))
@@ -220,7 +220,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         starLabel.text = String(starCount)
         rockLabel.text = String(rockCount)
         heartLabel.text = String(heartCount)
-        energyLabel.text = String(energyCount)
+        energyLabel.text = String(remainingEnergy)
     }
 
     func addAssets() {
@@ -242,7 +242,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         character.physicsBody?.affectedByGravity = false
         character.physicsBody?.allowsRotation = false
 
-        doesCollide(item: "character", node: character)
+        doesCollide(Element: "character", node: character)
 
         maze.blockArray[0][0].occupied = true
     }
@@ -263,7 +263,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(dino1)
         dino1.physicsBody?.affectedByGravity = false
         dino1.physicsBody?.allowsRotation = false
-        doesCollide(item: "dino1", node: dino1)
+        doesCollide(Element: "dino1", node: dino1)
 
     }
 
@@ -279,7 +279,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(dino2)
         dino2.physicsBody?.affectedByGravity = false
         dino2.physicsBody?.allowsRotation = false
-        doesCollide(item: "dino2", node: dino2)
+        doesCollide(Element: "dino2", node: dino2)
 
     }
 
@@ -294,7 +294,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(dino3)
         dino3.physicsBody?.affectedByGravity = false
         dino3.physicsBody?.allowsRotation = false
-        doesCollide(item: "dino3", node: dino3)
+        doesCollide(Element: "dino3", node: dino3)
 
     }
 
@@ -390,7 +390,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             maze.blockArray[x][y].id = item
             itemArray[x][y] = element
         }
-        doesCollide(item: item, node: element)
+        doesCollide(Element: item, node: element)
     }
 
     func gestures() {
@@ -443,7 +443,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             rock.physicsBody = SKPhysicsBody(rectangleOf: rock.size)
             self.addChild(rock)
             rock.physicsBody?.affectedByGravity = false
-            doesCollide(item: "rock", node: rock)
+            doesCollide(Element: "rock", node: rock)
 
             var dx = CGFloat(location.x - character.position.x)
             var dy = CGFloat(location.y - character.position.y)
@@ -467,7 +467,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fire.physicsBody = SKPhysicsBody(rectangleOf: fire.size)
         self.addChild(fire)
         fire.physicsBody?.affectedByGravity = false
-        doesCollide(item: "fire", node: fire)
+        doesCollide(Element: "fire", node: fire)
 
         let shoot: SKAction = SKAction.moveBy(x: dino1.anchorPoint.x, y: -1000, duration: 10)
         fire.run(shoot)
@@ -572,272 +572,253 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return move
     }
 
-    @objc func dino4Moves(sender: Timer){
-
+    @objc func moveDino4(sender: Timer){
         if dino4.action(forKey: "move4") == nil{
             var allActions = [SKAction]()
-            let moveLeft = SKAction.moveBy(x: -1300, y: 0, duration: 10)
-            let moveRight = SKAction.moveBy(x: 1300, y: 0, duration: 10)
+            let moveLeft = SKAction.moveBy(x: -1300, y: 0, duration: 7)
+            let moveRight = SKAction.moveBy(x: 1300, y: 0, duration: 7)
             allActions.append(moveRight)
             allActions.append(moveLeft)
             dino4.run(SKAction.sequence(allActions), withKey: "move4")
         }
-
     }
 
-    func doesCollide(item: String, node: SKSpriteNode){
-        switch item {
+    func doesCollide(Element: String, node: SKSpriteNode){
+        switch Element {
         case "block":
             node.physicsBody?.categoryBitMask = ElementNames.Block
-            node.physicsBody?.contactTestBitMask = ElementNames.Beast2
-
+            node.physicsBody?.contactTestBitMask = ElementNames.Dino2
         case "food":
             node.physicsBody?.categoryBitMask = ElementNames.Food
-
         case "star":
             node.physicsBody?.categoryBitMask = ElementNames.Star
-
         case "rock":
             node.physicsBody?.categoryBitMask = ElementNames.Rock
             node.physicsBody?.collisionBitMask = ElementNames.Rock
-
-        case "character":
-            node.physicsBody?.categoryBitMask = ElementNames.Character
-            node.physicsBody?.contactTestBitMask = ElementNames.Wall | ElementNames.Block | ElementNames.Food | ElementNames.Star | ElementNames.Beast0
-            node.physicsBody?.collisionBitMask = ElementNames.Wall | ElementNames.Block
-
-        case "border":
-            node.physicsBody?.categoryBitMask = ElementNames.Wall
-            node.physicsBody?.contactTestBitMask = ElementNames.Character | ElementNames.Beast2
-            node.physicsBody?.collisionBitMask = ElementNames.Rock | ElementNames.Character | ElementNames.Beast2
-
-        case "water":
-            node.physicsBody?.categoryBitMask = ElementNames.Water
-            node.physicsBody?.contactTestBitMask = ElementNames.Character
-
-        case "dino1":
-            node.physicsBody?.categoryBitMask = ElementNames.Beast0
-            node.physicsBody?.contactTestBitMask = ElementNames.Character | ElementNames.Rock | ElementNames.Food
-            node.physicsBody?.collisionBitMask = ElementNames.Water | ElementNames.Wall
-
-        case "dino2":
-            node.physicsBody?.categoryBitMask = ElementNames.Beast1
-            node.physicsBody?.contactTestBitMask = ElementNames.Character | ElementNames.Rock | ElementNames.Food
-            node.physicsBody?.collisionBitMask = ElementNames.Wall
-
-        case "dino3":
-            node.physicsBody?.categoryBitMask = ElementNames.Beast2
-            node.physicsBody?.contactTestBitMask = ElementNames.Character | ElementNames.Rock | ElementNames.Block | ElementNames.Water | ElementNames.Food
-            node.physicsBody?.collisionBitMask = ElementNames.Wall | ElementNames.Block | ElementNames.Water
-
         case "fire":
             node.physicsBody?.categoryBitMask = ElementNames.Fire
             node.physicsBody?.contactTestBitMask = ElementNames.Character
             node.physicsBody?.collisionBitMask =  ElementNames.Fire
-
-        default:
-            break
-        }
-    }
-
-    func addStarScore() {
-        starCount! += 1
-        updateLabels()
-    }
-
-    func addEnergy() {
-        if energyCount <= 50 {
-            energyCount! += 50
-        } else {
-            energyCount = 100
-        }
-        updateLabels()
-    }
-
-    func hurtByDino(whichOne: String) {
-        switch whichOne{
+        case "border":
+            node.physicsBody?.categoryBitMask = ElementNames.Wall
+            node.physicsBody?.contactTestBitMask = ElementNames.Character | ElementNames.Dino2
+            node.physicsBody?.collisionBitMask = ElementNames.Rock | ElementNames.Character | ElementNames.Dino2
+        case "water":
+            node.physicsBody?.categoryBitMask = ElementNames.Water
+            node.physicsBody?.contactTestBitMask = ElementNames.Character
+        case "character":
+            node.physicsBody?.categoryBitMask = ElementNames.Character
+            node.physicsBody?.contactTestBitMask = ElementNames.Wall | ElementNames.Block | ElementNames.Food | ElementNames.Star | ElementNames.Dino1
+            node.physicsBody?.collisionBitMask = ElementNames.Wall | ElementNames.Block
         case "dino1":
-            checkEnergyWhenHurt(damage: 60)
+            node.physicsBody?.categoryBitMask = ElementNames.Dino1
+            node.physicsBody?.contactTestBitMask = ElementNames.Character | ElementNames.Rock | ElementNames.Food
+            node.physicsBody?.collisionBitMask = ElementNames.Water | ElementNames.Wall
         case "dino2":
-            checkEnergyWhenHurt(damage: 80)
+            node.physicsBody?.categoryBitMask = ElementNames.Dino2
+            node.physicsBody?.contactTestBitMask = ElementNames.Character | ElementNames.Rock | ElementNames.Food
+            node.physicsBody?.collisionBitMask = ElementNames.Wall
         case "dino3":
-            checkEnergyWhenHurt(damage: 100)
-        case "fire":
-            checkEnergyWhenHurt(damage: 100)
+            node.physicsBody?.categoryBitMask = ElementNames.Dino2
+            node.physicsBody?.contactTestBitMask = ElementNames.Character | ElementNames.Rock | ElementNames.Block | ElementNames.Water | ElementNames.Food
+            node.physicsBody?.collisionBitMask = ElementNames.Wall | ElementNames.Block | ElementNames.Water
         default:
             break
         }
     }
 
-    func checkEnergyWhenHurt(damage: Int) {
-        if (damage >= energyCount && heartCount > 0) {
-            heartCount! -= 1
-            energyCount! += 100
-            energyCount! -= damage
-        } else if (damage < energyCount) {
-            energyCount! -= damage
-        } else {
-            run(deathSound)
-            energyCount = 0
-            gameOver()
-            print("Game Over")
-            invalidateAllTimers()
+    func bitten(by: String) {
+        switch by {
+        case "fire":
+            energyStatus(damage: 100)
+        case "dino1":
+            energyStatus(damage: 60)
+        case "dino2":
+            energyStatus(damage: 80)
+        case "dino3":
+            energyStatus(damage: 100)
+        default:
+            break
         }
     }
 
-    @objc func drainEnergy(sender: Timer) {
-        energyCount! -= 1
-        if energyCount == 0 {
+    func energyStatus(damage: Int) {
+        if (damage < remainingEnergy) {
+            remainingEnergy! -= damage
+        }  else if (damage >= remainingEnergy && heartCount > 0) {
+            heartCount! -= 1
+            remainingEnergy! += (100 - damage)
+        } else {
+            run(gameOverSound)
+            remainingEnergy = 0
+            gameOver()
+            killTimers()
+        }
+    }
+
+    @objc func attrition(sender: Timer) {
+        remainingEnergy! -= 1
+        if remainingEnergy == 0 {
             if heartCount > 0 {
                 heartCount! -= 1
-                energyCount=100
+                remainingEnergy = 100
             } else {
-                print("Game Over")
-                run(deathSound)
+                run(gameOverSound)
                 gameOver()
                 sender.invalidate()
-                invalidateAllTimers()
+                killTimers()
             }
         }
         updateLabels()
     }
 
-
-
-
-
-
     func didBegin(_ contact: SKPhysicsContact) {
-
-        //*************character*****************
-        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Wall) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Wall){
-            print ("Char hit")
+        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Wall)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Wall)
+                   || (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Block)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Block) {
             character.removeAction(forKey: "move")
-
         }
 
-        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Block) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Block){
-            character.removeAction(forKey: "move")
-
-        }
-
-        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Food) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Food){
-            run(eatSound)
+        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Food)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Food){
+            run(eatingSound)
+            statusBarLabel.text = "Yum, +50 Energy"
             addEnergy()
-            statusBarLabel.text = "Gained 50 Energy"
-            searchAndDestroyItem(item: "food")
-
+            remove(element: "food")
         }
 
-        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Star) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Star){
-            run(starSound)
-            searchAndDestroyItem(item: "star")
-            addStarScore()
+        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Star)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Star){
+            run(twinkleSound)
+            addStarCount()
+            statusBarLabel.text = "Nice, +1 Star"
+            remove(element: "star")
         }
 
-        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Fire) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Fire){
-            run(fireHurtSound)
-            hurtByDino(whichOne: "fire")
+        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Fire)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Fire){
+            run(fireSound)
+            statusBarLabel.text = "It burns!"
+            bitten(by: "fire")
         }
 
-        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Water) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Water){
-            invalidateAllTimers()
-            run(deathSound)
+        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Water)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Water){
+            killTimers()
+            run(gameOverSound)
+            statusBarLabel.text = "Game Over!"
             gameOver()
         }
 
-        //*******************dino1****************
-        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Beast0) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Beast0){
-            hurtByDino(whichOne: "dino1")
-            run(hurtSound)
+        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Dino1)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Dino1) {
+            bitten(by: "dino1")
+            statusBarLabel.text = "Ouch!"
+            run(bittenSound)
 
         }
 
-        if (contact.bodyA.categoryBitMask == ElementNames.Rock && contact.bodyB.categoryBitMask == ElementNames.Beast0) || (contact.bodyB.categoryBitMask == ElementNames.Rock && contact.bodyA.categoryBitMask == ElementNames.Beast0){
-            run(enemyDeathSound)
+        if (contact.bodyA.categoryBitMask == ElementNames.Rock && contact.bodyB.categoryBitMask == ElementNames.Dino1)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Rock && contact.bodyA.categoryBitMask == ElementNames.Dino1) {
+            run(killSound)
             dino1.removeFromParent()
-            statusBarLabel.text = "dino 1 killed"
-
+            statusBarLabel.text = "Triceratops killed"
         }
 
-        if (contact.bodyA.categoryBitMask == ElementNames.Beast0 && contact.bodyB.categoryBitMask == ElementNames.Food) || (contact.bodyB.categoryBitMask == ElementNames.Beast0 && contact.bodyA.categoryBitMask == ElementNames.Food){
-            run(eatSound)
-            searchAndDestroyItem(item: "food")
-
+        if (contact.bodyA.categoryBitMask == ElementNames.Dino1 && contact.bodyB.categoryBitMask == ElementNames.Food)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Dino1 && contact.bodyA.categoryBitMask == ElementNames.Food) {
+            run(eatingSound)
+            remove(element: "food")
         }
 
-        //***********dino2************
-
-        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Beast1) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Beast1){
-            hurtByDino(whichOne: "dino2")
-            run(hurtSound)
+        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Dino2)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Dino2) {
+            bitten(by: "dino2")
+            statusBarLabel.text = "Ouch!"
+            run(bittenSound)
         }
 
-        if (contact.bodyA.categoryBitMask == ElementNames.Rock && contact.bodyB.categoryBitMask == ElementNames.Beast1) || (contact.bodyB.categoryBitMask == ElementNames.Rock && contact.bodyA.categoryBitMask == ElementNames.Beast1){
-            run(enemyDeathSound)
+        if (contact.bodyA.categoryBitMask == ElementNames.Rock && contact.bodyB.categoryBitMask == ElementNames.Dino2)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Rock && contact.bodyA.categoryBitMask == ElementNames.Dino2) {
+            run(killSound)
             dino2.removeFromParent()
-            statusBarLabel.text = "dino2 killed"
+            statusBarLabel.text = "Tyrannosaurus rex killed"
 
         }
 
-        if (contact.bodyA.categoryBitMask == ElementNames.Beast1 && contact.bodyB.categoryBitMask == ElementNames.Food) || (contact.bodyB.categoryBitMask == ElementNames.Beast1 && contact.bodyA.categoryBitMask == ElementNames.Food){
-            run(eatSound)
-            searchAndDestroyItem(item: "food")
+        if (contact.bodyA.categoryBitMask == ElementNames.Dino2 && contact.bodyB.categoryBitMask == ElementNames.Food)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Dino2 && contact.bodyA.categoryBitMask == ElementNames.Food) {
+            run(eatingSound)
+            remove(element: "food")
 
         }
 
-        //*************dino3************
-
-        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Beast2) || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Beast2){
-            hurtByDino(whichOne: "dino3")
-            run(hurtSound)
-
-
+        if (contact.bodyA.categoryBitMask == ElementNames.Character && contact.bodyB.categoryBitMask == ElementNames.Dino2)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Character && contact.bodyA.categoryBitMask == ElementNames.Dino2) {
+            bitten(by: "dino3")
+            statusBarLabel.text = "Ouch!"
+            run(bittenSound)
         }
 
-        if (contact.bodyA.categoryBitMask == ElementNames.Block && contact.bodyB.categoryBitMask == ElementNames.Beast2) || (contact.bodyB.categoryBitMask == ElementNames.Block && contact.bodyA.categoryBitMask == ElementNames.Beast2){
+        if (contact.bodyA.categoryBitMask == ElementNames.Block && contact.bodyB.categoryBitMask == ElementNames.Dino2)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Block && contact.bodyA.categoryBitMask == ElementNames.Dino2) {
+            dino3.removeAction(forKey: "move3")
+        }
+
+        if (contact.bodyA.categoryBitMask == ElementNames.Wall && contact.bodyB.categoryBitMask == ElementNames.Dino2)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Wall && contact.bodyA.categoryBitMask == ElementNames.Dino2){
+            dino3.removeAction(forKey: "move3")
+        }
+
+        if (contact.bodyA.categoryBitMask == ElementNames.Water && contact.bodyB.categoryBitMask == ElementNames.Dino2)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Water && contact.bodyA.categoryBitMask == ElementNames.Dino2){
             dino3.removeAction(forKey: "move3")
 
         }
 
-        if (contact.bodyA.categoryBitMask == ElementNames.Wall && contact.bodyB.categoryBitMask == ElementNames.Beast2) || (contact.bodyB.categoryBitMask == ElementNames.Wall && contact.bodyA.categoryBitMask == ElementNames.Beast2){
-            print ("dino3 hit border")
-            dino3.removeAction(forKey: "move3")
-
-        }
-
-        if (contact.bodyA.categoryBitMask == ElementNames.Water && contact.bodyB.categoryBitMask == ElementNames.Beast2) || (contact.bodyB.categoryBitMask == ElementNames.Water && contact.bodyA.categoryBitMask == ElementNames.Beast2){
-            dino3.removeAction(forKey: "move3")
-
-        }
-
-        if (contact.bodyA.categoryBitMask == ElementNames.Rock && contact.bodyB.categoryBitMask == ElementNames.Beast2) || (contact.bodyB.categoryBitMask == ElementNames.Rock && contact.bodyA.categoryBitMask == ElementNames.Beast2){
-            run(enemyDeathSound)
+        if (contact.bodyA.categoryBitMask == ElementNames.Rock && contact.bodyB.categoryBitMask == ElementNames.Dino2)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Rock && contact.bodyA.categoryBitMask == ElementNames.Dino2){
+            run(killSound)
             dino3.removeFromParent()
-            statusBarLabel.text = "dino3 killed"
-
+            statusBarLabel.text = "Stegosaurus killed"
         }
 
-        if (contact.bodyA.categoryBitMask == ElementNames.Beast2 && contact.bodyB.categoryBitMask == ElementNames.Food) || (contact.bodyB.categoryBitMask == ElementNames.Beast2 && contact.bodyA.categoryBitMask == ElementNames.Food){
-            run(eatSound)
-            searchAndDestroyItem(item: "food")
+        if (contact.bodyA.categoryBitMask == ElementNames.Dino2 && contact.bodyB.categoryBitMask == ElementNames.Food)
+                   || (contact.bodyB.categoryBitMask == ElementNames.Dino2 && contact.bodyA.categoryBitMask == ElementNames.Food){
+            run(eatingSound)
+            remove(element: "food")
         }
     }
 
-    func invalidateAllTimers() {
+    func addStarCount() {
+        starCount! += 1
+        updateLabels()
+    }
+
+    func addEnergy() {
+        if remainingEnergy <= 50 {
+            remainingEnergy! += 50
+        } else {
+            remainingEnergy = 100
+        }
+        updateLabels()
+    }
+
+    func killTimers() {
         for timer in allTimers {
             timer.invalidate()
         }
     }
 
-    func searchAndDestroyItem(item: String){
+    func remove(element: String){
         for i in 0..<maze.blockArray.count{
             for j in 0..<maze.blockArray[i].count{
-                if maze.blockArray[i][j].id == item {
+                if maze.blockArray[i][j].id == element {
                     itemArray[i][j].removeFromParent()
                     maze.blockArray[i][j].occupied = false
                     maze.blockArray[i][j].id = ""
-                    switch item {
+                    switch element {
                     case "food":
                         addFood()
                     case "star":
@@ -851,9 +832,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func gameOver(){
-        let flipTransition = SKTransition.doorsCloseHorizontal(withDuration: 1.0)
+        let transition = SKTransition.doorsCloseHorizontal(withDuration: 2)
         let gameOverScene = GameOver(size: self.size, starCount: starCount)
         gameOverScene.scaleMode = .aspectFill
-        self.view?.presentScene(gameOverScene, transition: flipTransition)
+        self.view?.presentScene(gameOverScene, transition: transition)
     }
 }

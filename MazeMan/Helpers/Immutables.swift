@@ -23,12 +23,12 @@ let background = SKSpriteNode(imageNamed: "bg")
 
 // Sounds
 let throwSound = SKAction.playSoundFileNamed("throw.wav", waitForCompletion:false)
-let eatSound = SKAction.playSoundFileNamed("eat.wav", waitForCompletion:false)
-let deathSound = SKAction.playSoundFileNamed("death.wav", waitForCompletion:false)
-let starSound = SKAction.playSoundFileNamed("star.wav", waitForCompletion:false)
-let hurtSound = SKAction.playSoundFileNamed("bite.wav", waitForCompletion:false)
-let fireHurtSound = SKAction.playSoundFileNamed("fire.wav", waitForCompletion:false)
-let enemyDeathSound = SKAction.playSoundFileNamed("dino.wav", waitForCompletion:false)
+let eatingSound = SKAction.playSoundFileNamed("eat.wav", waitForCompletion:false)
+let gameOverSound = SKAction.playSoundFileNamed("death.wav", waitForCompletion:false)
+let twinkleSound = SKAction.playSoundFileNamed("star.wav", waitForCompletion:false)
+let bittenSound = SKAction.playSoundFileNamed("bite.wav", waitForCompletion:false)
+let fireSound = SKAction.playSoundFileNamed("fire.wav", waitForCompletion:false)
+let killSound = SKAction.playSoundFileNamed("dino.wav", waitForCompletion:false)
 
 // Bounds
 let boundTop = SKSpriteNode()

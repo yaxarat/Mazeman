@@ -9,9 +9,9 @@ struct ElementNames {
     static let Block: UInt32 = 0x1 << 0
     static let Wall: UInt32 = 0x1 << 1
     static let Character: UInt32 = 0x1 << 5
-    static let Beast0: UInt32 = 0x1 << 7
-    static let Beast1: UInt32 = 0x1 << 8
-    static let Beast2: UInt32 = 0x1 << 9
+    static let Dino1: UInt32 = 0x1 << 7
+    static let Dino2: UInt32 = 0x1 << 8
+    static let Dino3: UInt32 = 0x1 << 9
     static let Food: UInt32 = 0x1 << 2
     static let Rock: UInt32 = 0x1 << 4
     static let Star: UInt32 = 0x1 << 3
