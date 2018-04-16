@@ -23,9 +23,9 @@ class PlaceBlock {
             var newArray = [Block]()
             for j in 0...10 {
                 var val = Block()
-                val.locationY = i
-                val.locationX = j
-                val.hasBeenTaken = false
+                val.yCoordinate = i
+                val.xCoordinate = j
+                val.occupied = false
                 newArray.append(val)
             }
             blockArray.append(newArray)
@@ -33,6 +33,6 @@ class PlaceBlock {
     }
 
     func addNewBlock(x: Int, y: Int) {
-        blockArray[x][y].hasBeenTaken = false
+        blockArray[x][y].occupied = false
     }
 }

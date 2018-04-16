@@ -9,8 +9,8 @@
 import Foundation
 
 struct Block {
-    var hasBeenTaken = false
     var id: String?
-    var locationX = 0
-    var locationY = 0
+    var xCoordinate = 0
+    var yCoordinate = 0
+    var occupied = false
 }

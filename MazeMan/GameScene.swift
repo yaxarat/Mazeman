@@ -15,7 +15,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var maze = PlaceBlock()
     var allTimers = [Timer]()
     var itemArray: [[SKSpriteNode]]!
-    var blockCreationTimer = 0, addRockTimer = 0, reviveTimer = 0
+    var randXCoordinate = Int(arc4random_uniform(20))
+    var randYCoordinate = Int(arc4random_uniform(10))
+    var addBlockTimer = 0, addRockTimer = 0, respawnTimer = 0
     var rockCount, starCount, heartCount, energyCount: Int!
 
     override func didMove(to view: SKView) {
@@ -23,12 +25,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         initAll()
 
-        addFood()
-        addStar()
 
-        bottomCornerStats()
-        addGestures()
-        makeStatusBar()
+
     }
 
     override func update(_ currentTime: TimeInterval) {}
@@ -41,14 +39,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initLabel()
         initBg()
         initBoundsAndPonds()
-        addCharacters()
+        hud()
+        initMessage()
+        addAssets()
+        gestures()
     }
 
     func initTimeAndCount() {
         allTimers = [Timer]()
-        blockCreationTimer = 0
+        addBlockTimer = 0
         addRockTimer = 0
-        reviveTimer = 0
+        respawnTimer = 0
         starCount = 0
         rockCount = 10
         heartCount = 3
@@ -64,70 +65,62 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func initLabel() {
-        starCountLabel.fontSize = 30
-        rockCountLabel.fontSize = 30
-        heartCountLabel.fontSize = 30
-        energyCountLabel.fontSize = 30
+        starLabel.fontSize = 30
+        rockLabel.fontSize = 30
+        heartLabel.fontSize = 30
+        energyLabel.fontSize = 30
         statusBarLabel.fontSize = 30
 
-        starCountLabel.fontColor = SKColor.black
-        rockCountLabel.fontColor = SKColor.black
-        heartCountLabel.fontColor = SKColor.black
-        energyCountLabel.fontColor = SKColor.black
+        starLabel.fontColor = SKColor.black
+        rockLabel.fontColor = SKColor.black
+        heartLabel.fontColor = SKColor.black
+        energyLabel.fontColor = SKColor.black
         statusBarLabel.fontColor = SKColor.white
 
-        starCountLabel.text = String(starCount)
-        rockCountLabel.text = String(rockCount)
-        heartCountLabel.text = String(heartCount)
-        energyCountLabel.text = String(energyCount)
+        starLabel.text = String(starCount)
+        rockLabel.text = String(rockCount)
+        heartLabel.text = String(heartCount)
+        energyLabel.text = String(energyCount)
         statusBarLabel.text = "Survive the MazeMan"
     }
 
     func startTimers() {
         // For block
-        let blockCreationTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(addRandomBlock(sender:)), userInfo: nil, repeats: true)
+        let blockCreationTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(addBlocks(sender:)), userInfo: nil, repeats: true)
         allTimers.append(blockCreationTimer)
-        // TODO: COMMENT THESE
+        // For rock
         let getRocksTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(addRocks(sender:)), userInfo: nil, repeats: true)
         allTimers.append(getRocksTimer)
-        //
+        // For energy
         let drainTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(drainEnergy(sender:)), userInfo: nil, repeats: true)
         allTimers.append(drainTimer)
-        //
-        let timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dino1Moves(sender:)), userInfo: nil, repeats: true)
+        // For dino
+        let timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(moveDino1(sender:)), userInfo: nil, repeats: true)
         allTimers.append(timer1)
-        //
-        let timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dino2Moves(sender:)), userInfo: nil, repeats: true)
+        // For dino
+        let timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(moveDino2(sender:)), userInfo: nil, repeats: true)
         allTimers.append(timer2)
-        //
-        let timer3 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dino3Moves(sender:)), userInfo: nil, repeats: true)
+        // For dino
+        let timer3 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(moveDino3(sender:)), userInfo: nil, repeats: true)
         allTimers.append(timer3)
-        //
+        // For dino
         let timer4 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dino4Moves(sender:)), userInfo: nil, repeats: true)
         allTimers.append(timer4)
-        //
+        // For dino4 attack
         let timerfire = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(throwFire(sender:)), userInfo: nil, repeats: true)
         allTimers.append(timerfire)
-        //
+        // For dino respawn
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(respawn(sender:)), userInfo: nil, repeats: true)
         allTimers.append(timer)
     }
 
     func initBg() {
-        let background = SKSpriteNode(imageNamed: "bg")
         background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         background.size = self.size
         addChild(background)
     }
 
     func initBoundsAndPonds() {
-        let boundTop = SKSpriteNode()
-        let boundLeft = SKSpriteNode()
-        let boundRight = SKSpriteNode()
-        let boundBottom = SKSpriteNode()
-        let boundBottom1 = SKSpriteNode()
-        let boundBottom2 = SKSpriteNode()
-
         boundTop.position = CGPoint(x: self.frame.width/2, y: 896)
         boundTop.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.frame.width, height:1))
         addChild(boundTop)
@@ -156,10 +149,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(boundBottom2)
         boundBottom2.physicsBody?.isDynamic = false
 
-        createCollisionBitmasks(item: "border" , node: boundTop)
-        createCollisionBitmasks(item: "border" , node: boundBottom)
-        createCollisionBitmasks(item: "border" , node: boundLeft)
-        createCollisionBitmasks(item: "border" , node: boundRight)
+        doesCollide(item: "border" , node: boundTop)
+        doesCollide(item: "border" , node: boundBottom)
+        doesCollide(item: "border" , node: boundLeft)
+        doesCollide(item: "border" , node: boundRight)
 
         makeBoundary(yCoordinate: CGFloat(64 / 2))
         makeBoundary(yCoordinate: CGFloat(1024 - 64 / 2))
@@ -178,34 +171,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    func makeStatusBar() {
-        let status = SKSpriteNode(imageNamed:"game-status-panel")
-        status.position = CGPoint(x:self.frame.size.width/2, y: 980)
-        status.size = CGSize(width: 500, height: 100)
-        addChild(status)
-
-        statusBarLabel.position.x = status.position.x
-        statusBarLabel.position.y = status.position.y - 13
-        addChild(statusBarLabel)
-    }
-
-    func bottomCornerStats() {
+    func hud() {
         var image = ""
         var label: SKLabelNode!
         for i in 0...3 {
             switch i {
             case 0:
                 image = "star"
-                label = starCountLabel
+                label = starLabel
             case 1:
                 image = "rock"
-                label = rockCountLabel
+                label = rockLabel
             case 2:
                 image = "heart"
-                label = heartCountLabel
+                label = heartLabel
             case 3:
                 image = "battery"
-                label = energyCountLabel
+                label = energyLabel
             default:
                 break
             }
@@ -213,7 +195,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if image == "battery" {
                 object.size = CGSize(width: 100, height: 100)
             } else {
-                object.size = CGSize(width: 64, height: 64)
+                object.size = CGSize(width: 55, height: 55)
             }
             object.position = CGPoint(x:object.frame.size.width/2 + CGFloat(64*i), y: 32)
             label.position.x = object.position.x
@@ -223,19 +205,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    func updateLabelCounts() {
-        starCountLabel.text = String(starCount)
-        rockCountLabel.text = String(rockCount)
-        heartCountLabel.text = String(heartCount)
-        energyCountLabel.text = String(energyCount)
+    func initMessage() {
+        let message = SKSpriteNode(imageNamed:"game-status-panel")
+        message.position = CGPoint(x:self.frame.size.width/2, y: 950)
+        message.size = CGSize(width: 800, height: 100)
+        addChild(message)
+
+        statusBarLabel.position.x = message.position.x
+        statusBarLabel.position.y = message.position.y - 10
+        addChild(statusBarLabel)
     }
 
-    func addCharacters() {
+    func updateLabels() {
+        starLabel.text = String(starCount)
+        rockLabel.text = String(rockCount)
+        heartLabel.text = String(heartCount)
+        energyLabel.text = String(energyCount)
+    }
+
+    func addAssets() {
         Character()
         addDino1()
         addDino2()
         addDino3()
         addDino4()
+        addFood()
+        addStar()
     }
 
     func Character(){
@@ -247,9 +242,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         character.physicsBody?.affectedByGravity = false
         character.physicsBody?.allowsRotation = false
 
-        createCollisionBitmasks(item: "character", node: character)
+        doesCollide(item: "character", node: character)
 
-        maze.blockArray[0][0].hasBeenTaken = true
+        maze.blockArray[0][0].occupied = true
     }
 
     //TODO: FIX THESE
@@ -268,7 +263,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(dino1)
         dino1.physicsBody?.affectedByGravity = false
         dino1.physicsBody?.allowsRotation = false
-        createCollisionBitmasks(item: "dino1", node: dino1)
+        doesCollide(item: "dino1", node: dino1)
 
     }
 
@@ -284,7 +279,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(dino2)
         dino2.physicsBody?.affectedByGravity = false
         dino2.physicsBody?.allowsRotation = false
-        createCollisionBitmasks(item: "dino2", node: dino2)
+        doesCollide(item: "dino2", node: dino2)
 
     }
 
@@ -299,7 +294,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(dino3)
         dino3.physicsBody?.affectedByGravity = false
         dino3.physicsBody?.allowsRotation = false
-        createCollisionBitmasks(item: "dino3", node: dino3)
+        doesCollide(item: "dino3", node: dino3)
 
     }
 
@@ -313,17 +308,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
 
+    func addFood() {
+        addItem(itemName: "food")
+    }
+
+    func addStar() {
+        addItem(itemName: "star")
+    }
+
     @objc func respawn(sender: Timer) {
-        reviveTimer += 1
-        if reviveTimer == 5 {
-            reviveTimer = 0
-            checkForDinos()
+        respawnTimer += 1
+        if respawnTimer == 5 {
+            respawnTimer = 0
+            checkDinoStat()
         }
     }
 
-    func checkForDinos() {
+    func checkDinoStat() {
         if (self.childNode(withName: "dino1") == nil) {
-            addChild(dino1)
+            addDino1()
         }
         if (self.childNode(withName: "dino2") == nil) {
             addDino2()
@@ -333,15 +336,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    @objc func addRandomBlock(sender: Timer) {
-        blockCreationTimer += 1
+    @objc func addBlocks(sender: Timer) {
+        addBlockTimer += 1
+        addItem(itemName: "block")
 
-        addItem(itemToBe: "block")
-
-        if blockCreationTimer == 15 {
+        // Keep adding until 15 blocks
+        if addBlockTimer == 15 {
             sender.invalidate()
         }
-
     }
 
     @objc func addRocks(sender: Timer) {
@@ -350,66 +352,52 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if addRockTimer % 30 == 0 {
             if rockCount <= 10 {
                 rockCount! += 10
-                updateLabelCounts()
+                updateLabels()
             } else {
                 rockCount = 20
-                updateLabelCounts()
+                updateLabels()
             }
         }
     }
 
-
-    func addFood() {
-        addItem(itemToBe: "food")
-    }
-
-    func addStar() {
-        addItem(itemToBe: "star")
-    }
-
-
-    func addItem(itemToBe: String) {
-        var randX = Int(arc4random_uniform(20))
-        var randY = Int(arc4random_uniform(10))
-
-        if maze.blockArray[randX][randY].hasBeenTaken {
-            while maze.blockArray[randX][randY].hasBeenTaken {
-                randX = Int(arc4random_uniform(20))
-                randY = Int(arc4random_uniform(10))
+    func addItem(itemName: String) {
+        if maze.blockArray[randXCoordinate][randYCoordinate].occupied {
+            while maze.blockArray[randXCoordinate][randYCoordinate].occupied {
+                randXCoordinate = Int(arc4random_uniform(20))
+                randYCoordinate = Int(arc4random_uniform(10))
             }
         }
-        addNewItem(item: itemToBe , x: randX, y: randY)
-
-        maze.blockArray[randX][randY].hasBeenTaken = true
+        addNewItem(item: itemName, x: randXCoordinate, y: randYCoordinate)
+        maze.blockArray[randXCoordinate][randYCoordinate].occupied = true
     }
-
 
     func addNewItem(item: String, x: Int, y: Int) {
-
-        let object = SKSpriteNode(imageNamed: item)
+        let element = SKSpriteNode(imageNamed: item)
 
         if item == "water" {
-            object.size = CGSize(width:64, height:60)
+            // Different height is to prevent instant kill from initial rightward movement
+            element.size = CGSize(width:64, height:62)
         } else {
-            object.size = CGSize(width:64, height:64)
+            element.size = CGSize(width:64, height:64)
         }
-        object.position = CGPoint(x:object.frame.size.width/2 + CGFloat(64*x), y: object.frame.size.width/2 + CGFloat(64*(y+1)))
-        object.physicsBody = SKPhysicsBody(rectangleOf: object.size, center: object.anchorPoint)
-        self.addChild(object)
-        object.physicsBody?.isDynamic = false
+
+        element.position = CGPoint(x: element.frame.size.width/2 + CGFloat(64*x), y: element.frame.size.width/2 + CGFloat(64*(y+1)))
+        element.physicsBody = SKPhysicsBody(rectangleOf: element.size, center: element.anchorPoint)
+        self.addChild(element)
+        element.physicsBody?.isDynamic = false
 
         if ((x >= 0 && x <= maze.blockArray.count) && (y >= 0 && y <= maze.blockArray.count)){
             maze.blockArray[x][y].id = item
-            itemArray[x][y] = object
+            itemArray[x][y] = element
         }
-
-        createCollisionBitmasks(item: item, node: object)
+        doesCollide(item: item, node: element)
     }
 
-    func addGestures() {
+    func gestures() {
         let directions: [UISwipeGestureRecognizerDirection] = [.right, .left, .up, .down]
+
         for direction in directions {
-            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipe(sender:)))
+            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(gestureResponce(sender:)))
             swipe.direction = direction
             self.view?.addGestureRecognizer(swipe)
         }
@@ -418,200 +406,167 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.view?.addGestureRecognizer(tap)
     }
 
-    @objc func throwRock(sender: UITapGestureRecognizer) {
-        if rockCount > 0 {
-            var location = sender.location(in: sender.view)
-            location = self.convertPoint(fromView: location)
-            print (location)
-
-            let rock = SKSpriteNode(imageNamed:"rock")
-
-            rock.position = character.position
-
-            rock.size = CGSize(width: 40, height: 40)
-            rock.physicsBody = SKPhysicsBody(rectangleOf: rock.size)
-            self.addChild(rock)
-
-            rock.physicsBody?.affectedByGravity = false
-
-            createCollisionBitmasks(item: "rock", node: rock)
-
-            var dx = CGFloat(location.x - character.position.x)
-            var dy = CGFloat(location.y - character.position.y)
-
-            let magnitude = sqrt(dx * dx + dy * dy)
-
-            dx /= magnitude
-            dy /= magnitude
-
-            let vector = CGVector(dx: 50 * dx, dy: 50 * dy)
-
-            rock.physicsBody?.applyImpulse(vector)
-            rockCount! -= 1
-            updateLabelCounts()
-            run(throwSound)
-        }
-
-
-
-    }
-
-    @objc func throwFire(sender: Timer) {
-
-        let fire = SKSpriteNode(imageNamed: "fire")
-        fire.position = dino4.position
-
-        fire.size = CGSize(width: 40, height: 40)
-        fire.physicsBody = SKPhysicsBody(rectangleOf: fire.size)
-        self.addChild(fire)
-
-        fire.physicsBody?.affectedByGravity = false
-
-        createCollisionBitmasks(item: "fire", node: fire)
-
-
-        let shoot: SKAction = SKAction.moveBy(x: dino1.anchorPoint.x, y: -1000, duration: 10)
-        fire.run(shoot)
-    }
-
-    @objc func respondToSwipe(sender: UISwipeGestureRecognizer) {
+    @objc func gestureResponce(sender: UISwipeGestureRecognizer) {
         let currentX = character.anchorPoint.x
         let currentY = character.anchorPoint.y
 
         switch sender.direction {
         case UISwipeGestureRecognizerDirection.left:
             if character.position.x > 64 {
-                moveCharacter(xCoordinate: -1302, yCoordinate: currentY)
+                move(xCoordinate: -1400, yCoordinate: currentY)
             }
         case UISwipeGestureRecognizerDirection.right:
             if character.position.x < 1290 {
-                moveCharacter(xCoordinate: 1302, yCoordinate: currentY)
+                move(xCoordinate: 1400, yCoordinate: currentY)
             }
         case UISwipeGestureRecognizerDirection.up:
             if character.position.y < 800 {
-                moveCharacter(xCoordinate: currentX, yCoordinate: 864)
+                move(xCoordinate: currentX, yCoordinate: 900)
             }
         case UISwipeGestureRecognizerDirection.down:
             if character.position.y > 64 {
-                moveCharacter(xCoordinate: currentX, yCoordinate: -864)
+                move(xCoordinate: currentX, yCoordinate: -900)
             }
         default:
-            break
+        break
         }
-
-
     }
 
-    func moveCharacter(xCoordinate: CGFloat, yCoordinate: CGFloat) {
+    @objc func throwRock(sender: UITapGestureRecognizer) {
+        if rockCount >= 1 {
+            var location = sender.location(in: sender.view)
+            location = self.convertPoint(fromView: location)
+            let rock = SKSpriteNode(imageNamed:"rock")
+
+            rock.position = character.position
+            rock.size = CGSize(width: 30, height: 30)
+            rock.physicsBody = SKPhysicsBody(rectangleOf: rock.size)
+            self.addChild(rock)
+            rock.physicsBody?.affectedByGravity = false
+            doesCollide(item: "rock", node: rock)
+
+            var dx = CGFloat(location.x - character.position.x)
+            var dy = CGFloat(location.y - character.position.y)
+            let magnitude = sqrt(dx * dx + dy * dy)
+            dx /= magnitude
+            dy /= magnitude
+            let vector = CGVector(dx: 35 * dx, dy: 35 * dy)
+
+            rock.physicsBody?.applyImpulse(vector)
+            rockCount! -= 1
+            run(throwSound)
+            updateLabels()
+        }
+    }
+
+    @objc func throwFire(sender: Timer) {
+
+        let fire = SKSpriteNode(imageNamed: "fire")
+        fire.position = dino4.position
+        fire.size = CGSize(width: 30, height: 30)
+        fire.physicsBody = SKPhysicsBody(rectangleOf: fire.size)
+        self.addChild(fire)
+        fire.physicsBody?.affectedByGravity = false
+        doesCollide(item: "fire", node: fire)
+
+        let shoot: SKAction = SKAction.moveBy(x: dino1.anchorPoint.x, y: -1000, duration: 10)
+        fire.run(shoot)
+    }
+
+    func move(xCoordinate: CGFloat, yCoordinate: CGFloat) {
         character.removeAction(forKey: "move")
         let move = SKAction.moveBy(x: xCoordinate, y: yCoordinate, duration: 10)
         character.run(move, withKey: "move")
     }
 
-    @objc func dino1Moves(sender: Timer){
-
+    @objc func moveDino1(sender: Timer){
         if dino1.action(forKey: "move1") == nil{
             var allActions = [SKAction]()
-            let waitTime = Double(arc4random_uniform(3))+1
-            let wait = SKAction.wait(forDuration: waitTime)
-            let moveUp = SKAction.moveBy(x: 0, y:700, duration: 5)
-            let moveDown = SKAction.moveBy(x: 0, y: -700, duration: 5)
+            let wait = SKAction.wait(forDuration: (Double(arc4random_uniform(3))+1))
+            let moveUp = SKAction.moveBy(x: 0, y:700, duration: 3)
+            let moveDown = SKAction.moveBy(x: 0, y: -700, duration: 3)
             allActions.append(wait)
             allActions.append(moveUp)
             allActions.append(moveDown)
             dino1.run(SKAction.sequence(allActions), withKey: "move1")
         }
-
     }
 
-    @objc func dino2Moves(sender: Timer){
-
+    @objc func moveDino2(sender: Timer){
         if dino2.action(forKey: "move2") == nil{
             var allActions = [SKAction]()
-
-            let waitTime = Double(arc4random_uniform(3))+1
-            let wait = SKAction.wait(forDuration: waitTime)
-
-            let moveLeft = SKAction.moveBy(x: -1300, y: 0, duration: 7)
-            let flipRight = SKAction.scale(to: CGSize(width: -64, height: 64), duration: 0 )
-            let moveRight = SKAction.moveBy(x: 1300, y: 0, duration: 7)
-            let flipLeft = SKAction.scale(to: CGSize(width: 64, height: 64), duration: 0 )
+            let wait = SKAction.wait(forDuration: Double(arc4random_uniform(3))+1)
+            let moveLeft = SKAction.moveBy(x: -1300, y: 0, duration: 5)
+            let moveRight = SKAction.moveBy(x: 1300, y: 0, duration: 5)
+            let turnRight = SKAction.scale(to: CGSize(width: -64, height: 64), duration: 0 )
+            let turnLeft = SKAction.scale(to: CGSize(width: 64, height: 64), duration: 0 )
             allActions.append(moveLeft)
-            allActions.append(flipRight)
+            allActions.append(turnRight)
             allActions.append(moveRight)
-            allActions.append(flipLeft)
+            allActions.append(turnLeft)
             allActions.append(wait)
             dino2.run(SKAction.sequence(allActions), withKey: "move2")
         }
-
     }
 
-    @objc func dino3Moves(sender: Timer){
+    @objc func moveDino3(sender: Timer){
         if dino3.action(forKey: "move3") == nil{
-            let allActions = dino3MovementLogic()
-
+            var allActions = [SKAction]()
+            allActions = choiceDino3()
             dino3.run(SKAction.sequence(allActions), withKey: "move3")
         }
-
     }
 
-
-    func dino3MovementLogic() -> [SKAction] {
+    func choiceDino3() -> [SKAction] {
         var move = [SKAction]()
-        var validMove: Bool = false
-        while !validMove {
-            let sideToSideOrUpDown = Int(arc4random_uniform(2))
-            if sideToSideOrUpDown == 0 {
-                let leftOrRight = Int(arc4random_uniform(2))
-                if leftOrRight == 0 {
+        var moved: Bool = false
+
+        while !moved {
+            let direction = Int(arc4random_uniform(2))
+
+            if direction == 0 {
+                let lR = Int(arc4random_uniform(2))
+                if lR == 0 {
                     if dino3.position.x > 100 {
-                        let rotateNormal = SKAction.rotate(toAngle: 0, duration: 0)
-                        let flipLeft = SKAction.scale(to: CGSize(width: -64, height: 64), duration: 0 )
                         dino3.size.width = -64
-                        print(dino3.size.width)
-                        let moveLeft = SKAction.moveBy(x: -1340, y: 0, duration: 7)
-                        move.append(rotateNormal)
-                        move.append(flipLeft)
-                        move.append(moveLeft)
-                        validMove = true
+                        move.append(SKAction.rotate(toAngle: 0, duration: 0))
+                        move.append(SKAction.scale(to: CGSize(width: -64, height: 64), duration: 0))
+                        move.append(SKAction.moveBy(x: -1340, y: 0, duration: 5))
+                        moved = true
                     } else if dino3.position.x < 1200{
-                        let rotateNormal = SKAction.rotate(toAngle: 0, duration: 0)
-                        let flipRight = SKAction.scale(to: CGSize(width: 64, height: 64), duration: 0 )
-                        let moveRight = SKAction.moveBy(x: 1340, y: 0, duration: 7)
-                        move.append(rotateNormal)
-                        move.append(flipRight)
-                        move.append(moveRight)
-                        validMove = true
+                        move.append(SKAction.rotate(toAngle: 0, duration: 0))
+                        move.append(SKAction.scale(to: CGSize(width: 64, height: 64), duration: 0))
+                        move.append(SKAction.moveBy(x: 1340, y: 0, duration: 5))
+                        moved = true
                         dino3.size.width = 64
                     }
                 }
             } else {
-                let upOrDown = Int(arc4random_uniform(2))
-                if upOrDown == 0 {
+                let uD = Int(arc4random_uniform(2))
+
+                if uD == 0 {
                     if dino3.position.y < 800 {
-                        var rotateUp = SKAction()
+                        var rotation = SKAction()
                         if dino3.size.width == -64 {
-                            rotateUp = SKAction.rotate(toAngle: -1.57, duration: 0)
+                            rotation = SKAction.rotate(toAngle: -1.57, duration: 0)
                         } else {
-                            rotateUp = SKAction.rotate(toAngle: 1.57, duration: 0)
+                            rotation = SKAction.rotate(toAngle: 1.57, duration: 0)
                         }
-                        let moveUp = SKAction.moveBy(x:0, y:1000, duration: 7)
-                        move.append(rotateUp)
-                        move.append(moveUp)
-                        validMove = true
+                        move.append(rotation)
+                        move.append(SKAction.moveBy(x:0, y:1000, duration: 5))
                     }
                 } else if dino3.position.y > 100 {
-                    var rotateDown = SKAction()
+                    var rotation = SKAction()
+
                     if dino3.size.width == -64 {
-                        rotateDown = SKAction.rotate(toAngle: 1.57, duration: 0)
+                        rotation = SKAction.rotate(toAngle: 1.57, duration: 0)
                     } else {
-                        rotateDown = SKAction.rotate(toAngle: -1.57, duration: 0)
+                        rotation = SKAction.rotate(toAngle: -1.57, duration: 0)
                     }
-                    let moveDown = SKAction.moveBy(x:0, y:-1000, duration: 7)
-                    move.append(rotateDown)
-                    move.append(moveDown)
-                    validMove = true
+                    move.append(rotation)
+                    move.append(SKAction.moveBy(x:0, y:-1000, duration: 7))
                 }
+                moved = true
             }
         }
         return move
@@ -630,7 +585,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
 
-    func createCollisionBitmasks(item: String, node: SKSpriteNode){
+    func doesCollide(item: String, node: SKSpriteNode){
         switch item {
         case "block":
             node.physicsBody?.categoryBitMask = ElementNames.Block
@@ -687,7 +642,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func addStarScore() {
         starCount! += 1
-        updateLabelCounts()
+        updateLabels()
     }
 
     func addEnergy() {
@@ -696,7 +651,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else {
             energyCount = 100
         }
-        updateLabelCounts()
+        updateLabels()
     }
 
     func hurtByDino(whichOne: String) {
@@ -744,7 +699,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 invalidateAllTimers()
             }
         }
-        updateLabelCounts()
+        updateLabels()
     }
 
 
@@ -866,16 +821,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (contact.bodyA.categoryBitMask == ElementNames.Beast2 && contact.bodyB.categoryBitMask == ElementNames.Food) || (contact.bodyB.categoryBitMask == ElementNames.Beast2 && contact.bodyA.categoryBitMask == ElementNames.Food){
             run(eatSound)
             searchAndDestroyItem(item: "food")
-
         }
-
-
-
-
-
     }
-
-
 
     func invalidateAllTimers() {
         for timer in allTimers {
@@ -888,7 +835,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             for j in 0..<maze.blockArray[i].count{
                 if maze.blockArray[i][j].id == item {
                     itemArray[i][j].removeFromParent()
-                    maze.blockArray[i][j].hasBeenTaken = false
+                    maze.blockArray[i][j].occupied = false
                     maze.blockArray[i][j].id = ""
                     switch item {
                     case "food":
@@ -902,7 +849,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-
 
     func gameOver(){
         let flipTransition = SKTransition.doorsCloseHorizontal(withDuration: 1.0)

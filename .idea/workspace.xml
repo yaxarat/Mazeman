@@ -16,27 +16,46 @@
       <file leaf-file-name="GameScene.swift" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MazeMan/GameScene.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="289" column="0" lean-forward="true" selection-start-line="289" selection-start-column="0" selection-end-line="289" selection-end-column="0" />
+            <state relative-caret-position="606">
+              <caret line="592" column="0" lean-forward="true" selection-start-line="592" selection-start-column="0" selection-end-line="592" selection-end-column="0" />
               <folding>
                 <element signature="e#0#2#0" expanded="false" />
                 <element signature="e#143#159#0" expanded="true" />
-                <element signature="e#983#1218#0" expanded="false" />
-                <element signature="e#1224#1487#0" expanded="false" />
-                <element signature="e#1493#2205#0" expanded="false" />
-                <element signature="e#2211#4017#0" expanded="false" />
-                <element signature="e#4023#4254#0" expanded="false" />
-                <element signature="e#4260#6506#0" expanded="false" />
-                <element signature="e#6512#6844#0" expanded="false" />
-                <element signature="e#6850#7239#0" expanded="false" />
-                <element signature="e#7245#8309#0" expanded="false" />
-                <element signature="e#8315#8545#0" expanded="false" />
-                <element signature="e#8551#8675#0" expanded="false" />
-                <element signature="e#8681#9282#0" expanded="false" />
-                <element signature="e#9310#10016#0" expanded="false" />
-                <element signature="e#10022#10602#0" expanded="false" />
-                <element signature="e#10608#11103#0" expanded="false" />
-                <element signature="e#11109#11348#0" expanded="false" />
+                <element signature="e#578#695#0" expanded="false" />
+                <element signature="e#759#1023#0" expanded="false" />
+                <element signature="e#1029#1260#0" expanded="false" />
+                <element signature="e#1266#1529#0" expanded="false" />
+                <element signature="e#1535#2187#0" expanded="false" />
+                <element signature="e#2193#4061#0" expanded="false" />
+                <element signature="e#4067#4242#0" expanded="false" />
+                <element signature="e#4248#6203#0" expanded="false" />
+                <element signature="e#6209#6541#0" expanded="false" />
+                <element signature="e#6547#7577#0" expanded="false" />
+                <element signature="e#7583#7976#0" expanded="false" />
+                <element signature="e#7982#8187#0" expanded="false" />
+                <element signature="e#8193#8349#0" expanded="false" />
+                <element signature="e#8355#8940#0" expanded="false" />
+                <element signature="e#8968#9662#0" expanded="false" />
+                <element signature="e#9668#10236#0" expanded="false" />
+                <element signature="e#10242#10725#0" expanded="false" />
+                <element signature="e#10731#10970#0" expanded="false" />
+                <element signature="e#10976#11032#0" expanded="false" />
+                <element signature="e#11038#11094#0" expanded="false" />
+                <element signature="e#11100#11265#0" expanded="false" />
+                <element signature="e#11271#11566#0" expanded="false" />
+                <element signature="e#11572#11792#0" expanded="false" />
+                <element signature="e#11798#12107#0" expanded="false" />
+                <element signature="e#12113#12599#0" expanded="false" />
+                <element signature="e#12605#13516#0" expanded="false" />
+                <element signature="e#13522#14023#0" expanded="false" />
+                <element signature="e#14029#14961#0" expanded="false" />
+                <element signature="e#14967#15982#0" expanded="false" />
+                <element signature="e#15988#16483#0" expanded="false" />
+                <element signature="e#16489#16723#0" expanded="false" />
+                <element signature="e#16729#17280#0" expanded="false" />
+                <element signature="e#17286#18109#0" expanded="false" />
+                <element signature="e#18115#18368#0" expanded="false" />
+                <element signature="e#18374#20694#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -45,8 +64,8 @@
       <file leaf-file-name="Immutables.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Immutables.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state relative-caret-position="315">
+              <caret line="21" column="47" lean-forward="false" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
               <folding>
                 <element signature="e#108#125#0" expanded="true" />
               </folding>
@@ -66,6 +85,9 @@
       <find>hurtSound.run(SKAction.play())</find>
       <find>enemyDeathSound.run(SKAction.play())</find>
       <find>deathSound</find>
+      <find>let</find>
+      <find>aBlock</find>
+      <find>rock</find>
     </findStrings>
     <replaceStrings>
       <replace>startSound</replace>
@@ -84,6 +106,7 @@
         <option value="$PROJECT_DIR$/MazeMan/Helpers/Elements.swift" />
         <option value="$PROJECT_DIR$/MazeMan/GameViewController.swift" />
         <option value="$PROJECT_DIR$/MazeMan/Helpers/PlaceBlock.swift" />
+        <option value="$PROJECT_DIR$/MazeMan/Helpers/Block.swift" />
         <option value="$PROJECT_DIR$/MazeMan/Helpers/Immutables.swift" />
         <option value="$PROJECT_DIR$/MazeMan/GameScene.swift" />
       </list>
@@ -176,12 +199,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1523723474135</updated>
-      <workItem from="1523723475795" duration="12726000" />
+      <workItem from="1523723475795" duration="21427000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12726000" />
+    <option name="totallyTimeSpent" value="21427000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="448" y="-1440" width="1492" height="1440" extended-state="0" />
@@ -232,14 +255,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Block.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Elements.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -248,10 +263,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Block.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MazeMan/Helpers/Immutables.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state relative-caret-position="315">
+          <caret line="21" column="47" lean-forward="false" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
           <folding>
             <element signature="e#108#125#0" expanded="true" />
           </folding>
@@ -260,27 +283,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MazeMan/GameScene.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="289" column="0" lean-forward="true" selection-start-line="289" selection-start-column="0" selection-end-line="289" selection-end-column="0" />
+        <state relative-caret-position="606">
+          <caret line="592" column="0" lean-forward="true" selection-start-line="592" selection-start-column="0" selection-end-line="592" selection-end-column="0" />
           <folding>
             <element signature="e#0#2#0" expanded="false" />
             <element signature="e#143#159#0" expanded="true" />
-            <element signature="e#983#1218#0" expanded="false" />
-            <element signature="e#1224#1487#0" expanded="false" />
-            <element signature="e#1493#2205#0" expanded="false" />
-            <element signature="e#2211#4017#0" expanded="false" />
-            <element signature="e#4023#4254#0" expanded="false" />
-            <element signature="e#4260#6506#0" expanded="false" />
-            <element signature="e#6512#6844#0" expanded="false" />
-            <element signature="e#6850#7239#0" expanded="false" />
-            <element signature="e#7245#8309#0" expanded="false" />
-            <element signature="e#8315#8545#0" expanded="false" />
-            <element signature="e#8551#8675#0" expanded="false" />
-            <element signature="e#8681#9282#0" expanded="false" />
-            <element signature="e#9310#10016#0" expanded="false" />
-            <element signature="e#10022#10602#0" expanded="false" />
-            <element signature="e#10608#11103#0" expanded="false" />
-            <element signature="e#11109#11348#0" expanded="false" />
+            <element signature="e#578#695#0" expanded="false" />
+            <element signature="e#759#1023#0" expanded="false" />
+            <element signature="e#1029#1260#0" expanded="false" />
+            <element signature="e#1266#1529#0" expanded="false" />
+            <element signature="e#1535#2187#0" expanded="false" />
+            <element signature="e#2193#4061#0" expanded="false" />
+            <element signature="e#4067#4242#0" expanded="false" />
+            <element signature="e#4248#6203#0" expanded="false" />
+            <element signature="e#6209#6541#0" expanded="false" />
+            <element signature="e#6547#7577#0" expanded="false" />
+            <element signature="e#7583#7976#0" expanded="false" />
+            <element signature="e#7982#8187#0" expanded="false" />
+            <element signature="e#8193#8349#0" expanded="false" />
+            <element signature="e#8355#8940#0" expanded="false" />
+            <element signature="e#8968#9662#0" expanded="false" />
+            <element signature="e#9668#10236#0" expanded="false" />
+            <element signature="e#10242#10725#0" expanded="false" />
+            <element signature="e#10731#10970#0" expanded="false" />
+            <element signature="e#10976#11032#0" expanded="false" />
+            <element signature="e#11038#11094#0" expanded="false" />
+            <element signature="e#11100#11265#0" expanded="false" />
+            <element signature="e#11271#11566#0" expanded="false" />
+            <element signature="e#11572#11792#0" expanded="false" />
+            <element signature="e#11798#12107#0" expanded="false" />
+            <element signature="e#12113#12599#0" expanded="false" />
+            <element signature="e#12605#13516#0" expanded="false" />
+            <element signature="e#13522#14023#0" expanded="false" />
+            <element signature="e#14029#14961#0" expanded="false" />
+            <element signature="e#14967#15982#0" expanded="false" />
+            <element signature="e#15988#16483#0" expanded="false" />
+            <element signature="e#16489#16723#0" expanded="false" />
+            <element signature="e#16729#17280#0" expanded="false" />
+            <element signature="e#17286#18109#0" expanded="false" />
+            <element signature="e#18115#18368#0" expanded="false" />
+            <element signature="e#18374#20694#0" expanded="false" />
           </folding>
         </state>
       </provider>
