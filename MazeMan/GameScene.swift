@@ -243,9 +243,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         character.physicsBody?.isDynamic = true
         character.physicsBody?.affectedByGravity = false
         character.physicsBody?.allowsRotation = false
-
         doesCollide(Element: "character", node: character)
-
         maze.blockArray[0][0].occupied = true
     }
 
@@ -265,15 +263,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         dino1.physicsBody?.affectedByGravity = false
         dino1.physicsBody?.allowsRotation = false
         doesCollide(Element: "dino1", node: dino1)
-
     }
 
     func addDino2(){
-
         let spawn = CGFloat(arc4random_uniform(13))
         dino2.size = CGSize(width: 64, height: 64)
-        print (spawn)
-
         dino2.position = CGPoint(x: dino2.frame.size.width/2 + (64*20), y: dino2.frame.size.height/2 + (64 + 64*spawn))
         dino2.physicsBody = SKPhysicsBody(rectangleOf: dino2.size, center: dino2.anchorPoint)
         dino2.name = "dino2"
@@ -281,32 +275,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         dino2.physicsBody?.affectedByGravity = false
         dino2.physicsBody?.allowsRotation = false
         doesCollide(Element: "dino2", node: dino2)
-
     }
 
     func addDino3(){
-
         dino3.size = CGSize(width: 64, height: 64)
-
-
-        dino3.position = CGPoint(x: dino3.frame.size.width/2+10, y: dino3.frame.size.height/2 + (64*13-10))
+        dino3.position = CGPoint(x: dino3.frame.size.width/2-12, y: dino3.frame.size.height/2 + (64*10-30))
         dino3.physicsBody = SKPhysicsBody(rectangleOf: dino3.size, center: dino3.anchorPoint)
         dino3.name = "dino3"
         addChild(dino3)
         dino3.physicsBody?.affectedByGravity = false
         dino3.physicsBody?.allowsRotation = false
         doesCollide(Element: "dino3", node: dino3)
-
     }
 
     func addDino4(){
-
         dino4.size = CGSize(width: 64, height: 64)
         dino4.position = CGPoint(x: dino4.frame.size.width/2+10, y: dino4.frame.size.height/2 + (64*13 + 40))
         dino4.name = "dino4"
         addChild(dino4)
-
-
     }
 
     func addFood() {
